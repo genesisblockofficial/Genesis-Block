@@ -1,0 +1,17 @@
+<?php
+
+use App\Livewire\Home;
+use App\Livewire\Login;
+use App\Livewire\News;
+use App\Livewire\Register;
+use App\Livewire\Settings\Appearance;
+use App\Livewire\Settings\Password;
+use App\Livewire\Settings\Profile;
+use App\Livewire\Settings\TwoFactor;
+use Illuminate\Support\Facades\Route;
+use Laravel\Fortify\Features;
+
+Route::get('/', Home::class)->name('home');
+Route::get('login', Login::class)->name('login');
+Route::get('register', Register::class)->name('register');
+Route::get('news', News::class)->name('news');

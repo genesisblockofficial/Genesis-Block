@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market News & Insights | CryptoTrade Pro</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0a0e17;
+            --secondary-bg: #111827;
+            --accent-green: #00ff88;
+            --accent-blue: #00a3ff;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #ff6b35;
+            --accent-red: #ff4757;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background-image:
+                linear-gradient(rgba(0, 163, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 163, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 40s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-50px, -50px);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-green) !important;
+        }
+
+        .nav-link.active {
+            color: var(--accent-green) !important;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-green);
+            border-radius: 2px;
+        }
+
+        /* News Page Container */
+        .news-container {
+            padding: 2rem 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* News Categories */
+        .news-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover {
+            background: rgba(0, 163, 255, 0.1);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 163, 255, 0.3);
+        }
+
+        /* Featured News Card */
+        .featured-news {
+            background: linear-gradient(135deg, var(--card-bg), rgba(30, 41, 59, 0.9));
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .featured-news:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 163, 255, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 2rem;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--accent-blue);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .featured-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .featured-excerpt {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .news-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 163, 255, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 163, 255, 0.1);
+            color: var(--accent-blue);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .crypto {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent-green);
+        }
+
+        .forex {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent-purple);
+        }
+
+        .stocks {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--accent-orange);
+        }
+
+        .analysis {
+            background: rgba(255, 71, 87, 0.1);
+            color: var(--accent-red);
+        }
+
+        .regulation {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .news-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+
+        .news-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .news-read-time {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Market Sentiment Widget */
+        .sentiment-widget {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .sentiment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .sentiment-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .sentiment-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 50px;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .sentiment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .sentiment-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .sentiment-asset {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .asset-name {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .asset-sentiment {
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .sentiment-bullish {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent-green);
+        }
+
+        .sentiment-bearish {
+            background: rgba(255, 71, 87, 0.1);
+            color: var(--accent-red);
+        }
+
+        .sentiment-neutral {
+            background: rgba(148, 163, 184, 0.1);
+            color: var(--text-secondary);
+        }
+
+        .sentiment-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .sentiment-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .fill-bullish {
+            background: var(--accent-green);
+        }
+
+        .fill-bearish {
+            background: var(--accent-red);
+        }
+
+        .fill-neutral {
+            background: var(--text-secondary);
+        }
+
+        .sentiment-percentage {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Trending Topics */
+        .trending-widget {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .trending-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .trending-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .trending-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .trending-item:hover {
+            background: rgba(0, 163, 255, 0.1);
+            border-color: var(--accent-blue);
+            transform: translateX(5px);
+        }
+
+        .trending-rank {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            min-width: 30px;
+        }
+
+        .trending-content {
+            flex-grow: 1;
+        }
+
+        .trending-topic {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .trending-count {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Newsletter Subscription */
+        .newsletter-widget {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .newsletter-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex-grow: 1;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: white;
+            color: var(--accent-blue);
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--accent-green);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .featured-title {
+                font-size: 1.5rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .sentiment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .news-container {
+                padding: 1rem;
+            }
+
+            .featured-image {
+                height: 250px;
+            }
+
+            .news-categories {
+                padding: 0.5rem;
+            }
+
+            .category-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-spinner {
+            display: none;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent-blue);
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">CRYPTOTRADE PRO</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="markets.html">Markets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trading.html">Trading</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="portfolio.html">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- News Page Container -->
+    <div class="news-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Market News & Insights</h1>
+            <p class="page-subtitle">Stay updated with the latest cryptocurrency, forex, and stock market news,
+                analysis, and trends from around the globe.</p>
+        </div>
+
+        <!-- News Categories -->
+        <div class="news-categories">
+            <button class="category-btn active" data-category="all">All News</button>
+            <button class="category-btn" data-category="crypto">Cryptocurrency</button>
+            <button class="category-btn" data-category="forex">Forex & Metals</button>
+            <button class="category-btn" data-category="stocks">Stocks</button>
+            <button class="category-btn" data-category="analysis">Technical Analysis</button>
+            <button class="category-btn" data-category="regulation">Regulation</button>
+            <button class="category-btn" data-category="trending">Trending</button>
+        </div>
+
+        <!-- Featured News -->
+        <div class="featured-news">
+            <img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                alt="Bitcoin ETF Approval" class="featured-image">
+            <div class="featured-content">
+                <span class="featured-badge crypto">BREAKING NEWS</span>
+                <h2 class="featured-title">SEC Approves Multiple Bitcoin ETFs - Market Surges to New Highs</h2>
+                <p class="featured-excerpt">
+                    The U.S. Securities and Exchange Commission has approved 11 spot Bitcoin ETF applications in a
+                    landmark decision.
+                    Major financial institutions including BlackRock, Fidelity, and Ark Invest received approval,
+                    leading to a 15% surge
+                    in Bitcoin prices within hours. Analysts predict this could bring over $100 billion in institutional
+                    investments.
+                </p>
+                <div class="featured-meta">
+                    <div class="meta-item">
+                        <i class="far fa-calendar"></i>
+                        <span>January 10, 2024</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="far fa-clock"></i>
+                        <span>5 min read</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="far fa-eye"></i>
+                        <span>24.5k views</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Sentiment Widget -->
+        <div class="sentiment-widget">
+            <div class="sentiment-header">
+                <h3 class="sentiment-title">Live Market Sentiment</h3>
+                <div class="sentiment-indicator">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Overall: Bullish</span>
+                </div>
+            </div>
+            <div class="sentiment-grid">
+                <div class="sentiment-item">
+                    <div class="sentiment-asset">
+                        <div class="asset-name">
+                            <i class="fab fa-bitcoin"></i>
+                            <span>Bitcoin (BTC)</span>
+                        </div>
+                        <span class="asset-sentiment sentiment-bullish">Bullish</span>
+                    </div>
+                    <div class="sentiment-bar">
+                        <div class="sentiment-fill fill-bullish" style="width: 75%"></div>
+                    </div>
+                    <div class="sentiment-percentage">
+                        <span>25% Bearish</span>
+                        <span>75% Bullish</span>
+                    </div>
+                </div>
+                <div class="sentiment-item">
+                    <div class="sentiment-asset">
+                        <div class="asset-name">
+                            <i class="fab fa-ethereum"></i>
+                            <span>Ethereum (ETH)</span>
+                        </div>
+                        <span class="asset-sentiment sentiment-bullish">Bullish</span>
+                    </div>
+                    <div class="sentiment-bar">
+                        <div class="sentiment-fill fill-bullish" style="width: 68%"></div>
+                    </div>
+                    <div class="sentiment-percentage">
+                        <span>32% Bearish</span>
+                        <span>68% Bullish</span>
+                    </div>
+                </div>
+                <div class="sentiment-item">
+                    <div class="sentiment-asset">
+                        <div class="asset-name">
+                            <i class="fas fa-gem"></i>
+                            <span>Gold (XAU)</span>
+                        </div>
+                        <span class="asset-sentiment sentiment-neutral">Neutral</span>
+                    </div>
+                    <div class="sentiment-bar">
+                        <div class="sentiment-fill fill-neutral" style="width: 50%"></div>
+                    </div>
+                    <div class="sentiment-percentage">
+                        <span>50% Bearish</span>
+                        <span>50% Bullish</span>
+                    </div>
+                </div>
+                <div class="sentiment-item">
+                    <div class="sentiment-asset">
+                        <div class="asset-name">
+                            <i class="fas fa-chart-line"></i>
+                            <span>S&P 500</span>
+                        </div>
+                        <span class="asset-sentiment sentiment-bearish">Bearish</span>
+                    </div>
+                    <div class="sentiment-bar">
+                        <div class="sentiment-fill fill-bearish" style="width: 40%"></div>
+                    </div>
+                    <div class="sentiment-percentage">
+                        <span>60% Bearish</span>
+                        <span>40% Bullish</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Grid -->
+        <div class="news-grid" id="newsGrid">
+            <!-- News cards will be populated by JavaScript -->
+        </div>
+
+        <!-- Trending Topics -->
+        <div class="trending-widget">
+            <h3 class="trending-title">🔥 Trending Topics</h3>
+            <div class="trending-list">
+                <div class="trending-item">
+                    <div class="trending-rank">1</div>
+                    <div class="trending-content">
+                        <div class="trending-topic">Fed Interest Rate Decision</div>
+                        <div class="trending-count">12.4k mentions</div>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-rank">2</div>
+                    <div class="trending-content">
+                        <div class="trending-topic">Ethereum Dencun Upgrade</div>
+                        <div class="trending-count">8.7k mentions</div>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-rank">3</div>
+                    <div class="trending-content">
+                        <div class="trending-topic">AI Trading Bots</div>
+                        <div class="trending-count">7.2k mentions</div>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-rank">4</div>
+                    <div class="trending-content">
+                        <div class="trending-topic">Digital Euro Progress</div>
+                        <div class="trending-count">5.9k mentions</div>
+                    </div>
+                </div>
+                <div class="trending-item">
+                    <div class="trending-rank">5</div>
+                    <div class="trending-content">
+                        <div class="trending-topic">Web3 Gaming Tokens</div>
+                        <div class="trending-count">4.3k mentions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Subscription -->
+        <div class="newsletter-widget">
+            <h3 class="newsletter-title">Stay Ahead of the Market</h3>
+            <p class="newsletter-subtitle">
+                Get daily market insights, breaking news, and expert analysis delivered directly to your inbox.
+                Join 50,000+ traders who read our newsletter.
+            </p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CryptoTrade Pro</h4>
+                    <p>Professional trading platform for cryptocurrencies, forex, and stocks. Secure, fast, and
+                        reliable.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="markets.html">Live Markets</a></li>
+                        <li><a href="news.html">Market News</a></li>
+                        <li><a href="trading.html">Start Trading</a></li>
+                        <li><a href="help.html">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="cookies.html">Cookie Policy</a></li>
+                        <li><a href="risk.html">Risk Disclosure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-telegram"></i> Telegram</a></li>
+                        <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 CryptoTrade Pro. All rights reserved. Cryptocurrency trading involves significant risk.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Market news data
+        const marketNews = [
+            {
+                id: 1,
+                title: "Ethereum's Dencun Upgrade Goes Live - Gas Fees Drop 90%",
+                excerpt: "The long-awaited Dencun upgrade has successfully activated on Ethereum mainnet, introducing proto-danksharding and significantly reducing L2 transaction costs.",
+                category: "crypto",
+                image: "https://images.unsplash.com/photo-1620336655055-bd87c5d1d73f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-15",
+                readTime: "4 min",
+                views: "18.2k"
+            },
+            {
+                id: 2,
+                title: "Federal Reserve Holds Rates Steady at 5.25-5.50%",
+                excerpt: "The Federal Reserve maintained interest rates for the third consecutive meeting, signaling potential cuts later in 2024 amid cooling inflation.",
+                category: "forex",
+                image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-14",
+                readTime: "3 min",
+                views: "15.7k"
+            },
+            {
+                id: 3,
+                title: "Apple Hits $3 Trillion Market Cap Again - AI Push Drives Growth",
+                excerpt: "Apple becomes first company to close above $3 trillion market cap for second time, fueled by strong iPhone sales and AI integration plans.",
+                category: "stocks",
+                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-13",
+                readTime: "5 min",
+                views: "22.1k"
+            },
+            {
+                id: 4,
+                title: "Bitcoin Technical Analysis: Breaking $48K Resistance Level",
+                excerpt: "BTC shows strong bullish momentum as it breaks through key resistance. Our analysts examine next potential targets and support levels.",
+                category: "analysis",
+                image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-12",
+                readTime: "6 min",
+                views: "14.3k"
+            },
+            {
+                id: 5,
+                title: "EU Approves MiCA Regulation - Clear Rules for Crypto Industry",
+                excerpt: "The Markets in Crypto-Assets regulation gets final approval, establishing comprehensive rules for crypto service providers across Europe.",
+                category: "regulation",
+                image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-11",
+                readTime: "4 min",
+                views: "12.8k"
+            },
+            {
+                id: 6,
+                title: "Solana DeFi Volume Hits Record $3B Daily - Outpaces Ethereum",
+                excerpt: "Solana's DeFi ecosystem reaches new milestone with $3 billion in daily volume, driven by meme coin trading and new protocol launches.",
+                category: "crypto",
+                image: "https://images.unsplash.com/photo-1620336655055-bd87c5d1d73f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-10",
+                readTime: "3 min",
+                views: "19.5k"
+            },
+            {
+                id: 7,
+                title: "Gold Prices Surge to $2,050 as Middle East Tensions Escalate",
+                excerpt: "Safe-haven demand pushes gold prices to 3-month highs amid geopolitical tensions and dollar weakness.",
+                category: "forex",
+                image: "https://images.unsplash.com/photo-1563720223484-21c6c2d0c2c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-09",
+                readTime: "4 min",
+                views: "11.2k"
+            },
+            {
+                id: 8,
+                title: "Tesla Q4 Deliveries Miss Estimates - Stock Drops 8%",
+                excerpt: "Tesla reports 484,507 vehicle deliveries in Q4, below analyst expectations of 487,000, citing factory upgrades and delivery challenges.",
+                category: "stocks",
+                image: "https://images.unsplash.com/photo-1593941707882-a5bba5338fe2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-08",
+                readTime: "4 min",
+                views: "16.7k"
+            },
+            {
+                id: 9,
+                title: "US Dollar Index Technical Breakdown - Support at 101.50",
+                excerpt: "DXY breaks below key support level as markets price in rate cuts. Analysis of next levels and forex pair implications.",
+                category: "analysis",
+                image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-07",
+                readTime: "5 min",
+                views: "9.8k"
+            },
+            {
+                id: 10,
+                title: "SEC Delays Decision on Ethereum ETF Applications",
+                excerpt: "The SEC postpones decision on several spot Ethereum ETF applications, with new deadline set for May 2024.",
+                category: "regulation",
+                image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-06",
+                readTime: "3 min",
+                views: "13.4k"
+            },
+            {
+                id: 11,
+                title: "AI-Powered Trading Bots Gain Popularity - 40% of Retail Volume",
+                excerpt: "Machine learning algorithms now handle significant portion of retail trading volume, raising questions about market efficiency.",
+                category: "trending",
+                image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-05",
+                readTime: "6 min",
+                views: "21.3k"
+            },
+            {
+                id: 12,
+                title: "Bank of Japan Maintains Negative Rates - Yen Weakens Further",
+                excerpt: "BOJ keeps ultra-loose monetary policy, causing USD/JPY to break above 145.00. Market watches for intervention signals.",
+                category: "forex",
+                image: "https://images.unsplash.com/photo-1563720223484-21c6c2d0c2c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                date: "2024-01-04",
+                readTime: "4 min",
+                views: "10.6k"
+            }
+        ];
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            const newsGrid = document.getElementById('newsGrid');
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const newsletterForm = document.getElementById('newsletterForm');
+
+            // Render news articles
+            function renderNews(filter = 'all') {
+                newsGrid.innerHTML = '';
+
+                const filteredNews = filter === 'all'
+                    ? marketNews
+                    : marketNews.filter(article => article.category === filter);
+
+                filteredNews.forEach(article => {
+                    const newsCard = document.createElement('div');
+                    newsCard.className = 'news-card';
+
+                    const categoryClass = getCategoryClass(article.category);
+                    const categoryName = getCategoryName(article.category);
+
+                    newsCard.innerHTML = `
+                        <img src="${article.image}" alt="${article.title}" class="news-image">
+                        <div class="news-content">
+                            <span class="news-category ${categoryClass}">${categoryName}</span>
+                            <h4 class="news-title">${article.title}</h4>
+                            <p class="news-excerpt">${article.excerpt}</p>
+                            <div class="news-meta">
+                                <div class="news-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>${article.date}</span>
+                                </div>
+                                <div class="news-read-time">
+                                    <i class="far fa-clock"></i>
+                                    <span>${article.readTime} read</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    newsCard.addEventListener('click', () => {
+                        showArticleDetail(article);
+                    });
+
+                    newsGrid.appendChild(newsCard);
+                });
+            }
+
+            // Get category class
+            function getCategoryClass(category) {
+                const classes = {
+                    'crypto': 'crypto',
+                    'forex': 'forex',
+                    'stocks': 'stocks',
+                    'analysis': 'analysis',
+                    'regulation': 'regulation',
+                    'trending': 'crypto'
+                };
+                return classes[category] || 'crypto';
+            }
+
+            // Get category name
+            function getCategoryName(category) {
+                const names = {
+                    'crypto': 'Cryptocurrency',
+                    'forex': 'Forex & Metals',
+                    'stocks': 'Stocks',
+                    'analysis': 'Technical Analysis',
+                    'regulation': 'Regulation',
+                    'trending': 'Trending'
+                };
+                return names[category] || 'News';
+            }
+
+            // Show article detail (simulated)
+            function showArticleDetail(article) {
+                // In production, this would open a detailed view
+                alert(`Opening: ${article.title}\n\n${article.excerpt}\n\nPublished: ${article.date}\nViews: ${article.views}`);
+            }
+
+            // Category filter
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Show loading
+                    loadingSpinner.style.display = 'block';
+
+                    // Filter news
+                    const category = this.dataset.category;
+
+                    // Simulate loading
+                    setTimeout(() => {
+                        renderNews(category);
+                        loadingSpinner.style.display = 'none';
+
+                        // Smooth scroll to news grid
+                        newsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
+                });
+            });
+
+            // Newsletter subscription
+            newsletterForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const email = this.querySelector('.newsletter-input').value;
+
+                if (email) {
+                    // Show success message
+                    alert(`Thank you for subscribing! You'll receive our daily market insights at ${email}`);
+                    this.reset();
+                }
+            });
+
+            // Simulate real-time market sentiment updates
+            function updateMarketSentiment() {
+                const sentimentItems = document.querySelectorAll('.sentiment-item');
+
+                sentimentItems.forEach(item => {
+                    const bar = item.querySelector('.sentiment-fill');
+                    const percentages = item.querySelectorAll('.sentiment-percentage span');
+                    const sentimentText = item.querySelector('.asset-sentiment');
+
+                    // Generate random but realistic changes
+                    const currentWidth = parseInt(bar.style.width) || 50;
+                    const change = (Math.random() - 0.5) * 10;
+                    let newWidth = Math.max(20, Math.min(80, currentWidth + change));
+
+                    // Update bar
+                    bar.style.width = newWidth + '%';
+
+                    // Update percentages
+                    const bullish = Math.round(newWidth);
+                    const bearish = 100 - bullish;
+
+                    percentages[0].textContent = bearish + '% Bearish';
+                    percentages[1].textContent = bullish + '% Bullish';
+
+                    // Update sentiment text
+                    if (newWidth > 60) {
+                        sentimentText.textContent = 'Bullish';
+                        sentimentText.className = 'asset-sentiment sentiment-bullish';
+                        bar.className = 'sentiment-fill fill-bullish';
+                    } else if (newWidth < 40) {
+                        sentimentText.textContent = 'Bearish';
+                        sentimentText.className = 'asset-sentiment sentiment-bearish';
+                        bar.className = 'sentiment-fill fill-bearish';
+                    } else {
+                        sentimentText.textContent = 'Neutral';
+                        sentimentText.className = 'asset-sentiment sentiment-neutral';
+                        bar.className = 'sentiment-fill fill-neutral';
+                    }
+                });
+            }
+
+            // Initialize news grid
+            renderNews();
+
+            // Update sentiment every 30 seconds
+            setInterval(updateMarketSentiment, 30000);
+
+            // Simulate trending topics updates
+            function updateTrendingTopics() {
+                const trendingItems = document.querySelectorAll('.trending-item');
+                const topics = [
+                    'Fed Interest Rate Decision',
+                    'Ethereum Dencun Upgrade',
+                    'AI Trading Bots',
+                    'Digital Euro Progress',
+                    'Web3 Gaming Tokens',
+                    'Bitcoin Halving',
+                    'NFT Market Recovery',
+                    'DeFi Summer 2.0',
+                    'CBDC Developments',
+                    'Meme Coin Mania'
+                ];
+
+                // Randomly update one trending topic
+                const randomIndex = Math.floor(Math.random() * trendingItems.length);
+                const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+                const randomCount = Math.floor(Math.random() * 10000) + 1000;
+
+                const item = trendingItems[randomIndex];
+                item.querySelector('.trending-topic').textContent = randomTopic;
+                item.querySelector('.trending-count').textContent = randomCount.toLocaleString() + ' mentions';
+            }
+
+            // Update trending topics every 2 minutes
+            setInterval(updateTrendingTopics, 120000);
+
+            // Hover effects for news cards
+            const newsCards = document.querySelectorAll('.news-card');
+            newsCards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-8px)';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(-5px)';
+                });
+            });
+
+            // Featured news click handler
+            const featuredNews = document.querySelector('.featured-news');
+            featuredNews.addEventListener('click', function () {
+                alert('Opening featured article: SEC Approves Multiple Bitcoin ETFs - Market Surges to New Highs');
+            });
+
+            // Trending items click handler
+            const trendingItems = document.querySelectorAll('.trending-item');
+            trendingItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const topic = this.querySelector('.trending-topic').textContent;
+                    alert(`Searching for news about: ${topic}`);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
