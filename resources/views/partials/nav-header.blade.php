@@ -15,7 +15,7 @@
                     <li class="nav-item"><a class="nav-link" href="#markets">Markets</a></li>
                     <li class="nav-item"><a class="nav-link" href="#trading">Trading</a></li>
                     <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routIs('news') ? 'active' : '' }}"
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}"
                             href="{{ route('news') }}">News</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
