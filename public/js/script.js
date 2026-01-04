@@ -1,7 +1,7 @@
 // Configuration
 const CONFIG = {
     // Finnhub API Key - Replace with your own key
-    FINNHUB_API_KEY: 'cn7v29pr01qibtjf79lgcn7v29pr01qibtjf79m0',
+    FINNHUB_API_KEY: 'd5dakfhr01qur4ir155gd5dakfhr01qur4ir1560',
 
     // News categories mapping
     CATEGORIES: {
