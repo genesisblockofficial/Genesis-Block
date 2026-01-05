@@ -12,13 +12,15 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
                             href="{{ route('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#markets">Markets</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#trading">Trading</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('about-us') }}"
+                            href="{{ route('about-us') }}">About</a></li>
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}"
+                            href="{{ route('services') }}">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}"
                             href="{{ route('news') }}">News</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact-us') ? 'active' : '' }}"
+                            href="{{ route('contact-us') }}">Contact</a></li>
                 </ul>
                 <div class="d-flex ms-lg-3 mt-3 mt-lg-0">
                     <a href="{{ route('login') }}" class="btn btn-secondary me-2">Login</a>
