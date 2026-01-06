@@ -25,7 +25,11 @@ class CustomerResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return (string) User::role('customer')->count();
+        try {
+            return (string) User::role('customer')->count();
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     public static function form(Schema $schema): Schema

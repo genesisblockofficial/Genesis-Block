@@ -30,11 +30,14 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName('Tradewalla Admin')
             // ->brandLogo(asset('images/logo.png'))
+            ->passwordReset()
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->collapsibleNavigationGroups()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             ->pages([
                 Dashboard::class,
             ])

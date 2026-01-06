@@ -8,6 +8,10 @@ class About extends Component
 {
     public function render()
     {
-        return view('livewire.about')->layout('layout.app');
+        $aboutUs = \App\Models\AboutUs::first();
+
+        return view('livewire.about', [
+            'aboutUs' => $aboutUs,
+        ])->layout('layout.app');
     }
 }

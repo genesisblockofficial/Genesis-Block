@@ -5,33 +5,42 @@
         <div class="about-hero">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="about-title">Redefining Trading Excellence</h1>
-                    <p class="about-subtitle">QuantumTrade is a global leader in multi-asset trading, combining
-                        cutting-edge technology with deep market expertise to empower traders worldwide. Founded in
-                        2015, we've grown to serve over 2 million traders across 150+ countries.</p>
-                    <div class="about-cta-buttons">
-                        <button class="btn btn-primary">Start Trading</button>
-                        <button class="btn btn-secondary">Our Mission</button>
-                    </div>
+                    <h1 class="about-title">{{ $aboutUs->main_heading ?? 'Redefining Trading Excellence' }}</h1>
+                    <p class="about-subtitle">
+                        {{ $aboutUs->sub_heading ??
+                            'QuantumTrade is a global leader in multi-asset trading, combining cutting-edge technology with deep market expertise to empower traders worldwide. Founded in 2015, weve grown to serve over 2 million traders across 150+ countries' }}
+                    </p>
+                    @if (!empty($aboutUs->_is_start_trading) || !empty($aboutUs->_is_view_our_mission))
+                        <div class="about-cta-buttons">
+                            @if ($aboutUs->_is_start_trading)
+                                <button class="btn btn-primary">Start Trading</button>
+                            @endif
+                            @if ($aboutUs->_is_view_our_mission)
+                                <button class="btn btn-secondary">Our Mission</button>
+                            @endif
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-6">
                     <div class="about-hero-image">
                         <div class="trading-stats-card">
                             <div class="stats-grid">
                                 <div class="stat-item">
-                                    <div class="stat-number" data-count="8">0</div>
+                                    <div class="stat-number" data-count="8">{{ $aboutUs->experience_year ?? '0' }}</div>
                                     <div class="stat-label">Years Experience</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-number" data-count="2">0</div>
+                                    <div class="stat-number" data-count="2">{{ $aboutUs->traders_count ?? '0' }}</div>
                                     <div class="stat-label">Million+ Traders</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-number" data-count="4.2">0</div>
+                                    <div class="stat-number" data-count="4.2">{{ $aboutUs->traders_volumn ?? '0' }}
+                                    </div>
                                     <div class="stat-label">Trillion+ Volume</div>
                                 </div>
                                 <div class="stat-item">
-                                    <div class="stat-number" data-count="150">0</div>
+                                    <div class="stat-number" data-count="150">{{ $aboutUs->countries_count ?? '0' }}
+                                    </div>
                                     <div class="stat-label">Countries</div>
                                 </div>
                             </div>
@@ -50,15 +59,20 @@
                             <i class="fas fa-bullseye"></i>
                         </div>
                         <h3>Our Mission</h3>
-                        <p>To empower traders of all levels with institutional-grade tools, real-time market insights,
-                            and a secure trading environment that fosters growth and success in global financial
-                            markets.</p>
-                        <ul class="mission-list">
-                            <li><i class="fas fa-check-circle"></i> Provide transparent, competitive pricing</li>
-                            <li><i class="fas fa-check-circle"></i> Deliver cutting-edge trading technology</li>
-                            <li><i class="fas fa-check-circle"></i> Ensure bank-level security for all clients</li>
-                            <li><i class="fas fa-check-circle"></i> Foster financial literacy through education</li>
-                        </ul>
+                        @if (!empty($aboutUs->mission))
+                            <p>{!! $aboutUs->mission !!}</p>
+                        @else
+                            <p>To empower traders of all levels with institutional-grade tools, real-time market
+                                insights,
+                                and a secure trading environment that fosters growth and success in global financial
+                                markets.</p>
+                            <ul class="mission-list">
+                                <li><i class="fas fa-check-circle"></i> Provide transparent, competitive pricing</li>
+                                <li><i class="fas fa-check-circle"></i> Deliver cutting-edge trading technology</li>
+                                <li><i class="fas fa-check-circle"></i> Ensure bank-level security for all clients</li>
+                                <li><i class="fas fa-check-circle"></i> Foster financial literacy through education</li>
+                            </ul>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -67,15 +81,21 @@
                             <i class="fas fa-eye"></i>
                         </div>
                         <h3>Our Vision</h3>
-                        <p>To become the world's most trusted and innovative trading platform, bridging the gap between
-                            retail and institutional trading while setting new standards for transparency and client
-                            success.</p>
-                        <ul class="mission-list">
-                            <li><i class="fas fa-check-circle"></i> Expand to 5 million traders by 2025</li>
-                            <li><i class="fas fa-check-circle"></i> Launch AI-powered trading assistants</li>
-                            <li><i class="fas fa-check-circle"></i> Introduce blockchain settlement systems</li>
-                            <li><i class="fas fa-check-circle"></i> Pioneer sustainable trading initiatives</li>
-                        </ul>
+                        @if (!empty($aboutUs->vission))
+                            <p>{!! $aboutUs->vission !!}</p>
+                        @else
+                            <p>To become the world's most trusted and innovative trading platform, bridging the gap
+                                between
+                                retail and institutional trading while setting new standards for transparency and client
+                                success.</p>
+                            <ul class="mission-list">
+                                <li><i class="fas fa-check-circle"></i> Expand to 5 million traders by 2025</li>
+                                <li><i class="fas fa-check-circle"></i> Launch AI-powered trading assistants</li>
+                                <li><i class="fas fa-check-circle"></i> Introduce blockchain settlement systems</li>
+                                <li><i class="fas fa-check-circle"></i> Pioneer sustainable trading initiatives</li>
+                            </ul>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -131,29 +151,33 @@
                     <div class="value-icon">
                         <i class="fas fa-lock"></i>
                     </div>
-                    <h4>Security First</h4>
-                    <p>Client funds and data security are our top priority with military-grade encryption.</p>
+                    <h4>{{ $aboutUs->core_value_title_1 ?? 'Security First' }}</h4>
+                    <p>{{ $aboutUs->core_value_description_1 ?? 'Client funds and data security are our top priority with military-grade encryption.' }}
+                    </p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">
                         <i class="fas fa-balance-scale"></i>
                     </div>
-                    <h4>Transparency</h4>
-                    <p>No hidden fees, no surprises. Complete transparency in pricing and execution.</p>
+                    <h4>{{ $aboutUs->core_value_title_2 ?? 'Transparency' }}</h4>
+                    <p>{{ $aboutUs->core_value_description_2 ?? 'No hidden fees, no surprises. Complete transparency in pricing and execution.' }}
+                    </p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">
                         <i class="fas fa-lightbulb"></i>
                     </div>
-                    <h4>Innovation</h4>
-                    <p>Constantly pushing boundaries with new technologies to enhance trading experience.</p>
+                    <h4>{{ $aboutUs->core_value_title_3 ?? 'Innovation' }}</h4>
+                    <p>{{ $aboutUs->core_value_description_3 ?? 'Constantly pushing boundaries with new technologies to enhance trading experience.' }}
+                    </p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h4>Education</h4>
-                    <p>Empowering traders with knowledge through comprehensive educational resources.</p>
+                    <h4>{{ $aboutUs->core_value_title_4 ?? 'Education' }}</h4>
+                    <p>{{ $aboutUs->core_value_description_4 ?? 'Empowering traders with knowledge through comprehensive educational resources.' }}
+                    </p>
                 </div>
             </div>
         </div>
