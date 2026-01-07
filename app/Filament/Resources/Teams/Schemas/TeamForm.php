@@ -41,7 +41,7 @@ class TeamForm
                     ->columnSpanFull(),
                 Section::make('Settings')
                     ->schema([
-                        FileUpload::make('image')
+                        FileUpload::make('photo')
                             ->label('Profile Image')
                             ->image()
                             ->directory('team-members')

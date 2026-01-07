@@ -19,6 +19,8 @@ class TeamMember extends Model
         'instagram',
         'youtube',
         'description',
+        'is_active',
+        'is_featured',
         'deleted_at',
     ];
 }

@@ -21,7 +21,7 @@ class AboutUs extends Page
 
     protected static ?string $recordTitleAttribute = 'About Us';
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::InformationCircle;
 
     protected static string|UnitEnum|null $navigationGroup = 'Website CRM';
 

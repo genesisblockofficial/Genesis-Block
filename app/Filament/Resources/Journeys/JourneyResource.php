@@ -19,7 +19,7 @@ class JourneyResource extends Resource
 {
     protected static ?string $model = Journey::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowPath;
 
     protected static ?string $recordTitleAttribute = 'Journey';
 
