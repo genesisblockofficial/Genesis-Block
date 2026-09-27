@@ -73,10 +73,10 @@
         </div>
     </section>
 
-    <section class="home-services home-section" id="services">
+    <section class="home-services home-section" id="courses">
         <div class="container home-services-layout">
-            <div><p class="home-eyebrow">LEARN YOUR WAY</p><h2>Practical learning,<br><span>built around understanding.</span></h2></div>
-            <div><p>Explore Genesis Block's educational services for structured guidance across market concepts, analysis and responsible research.</p><a class="home-button home-button-outline" href="{{ route('services') }}">View services <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+            <div><p class="home-eyebrow">COMING SOON</p><h2>Courses are on<br><span>the way.</span></h2></div>
+            <div><p>We’re preparing practical learning programs around market foundations, technical analysis, risk awareness and discipline. Stay tuned for updates.</p><a class="home-button home-button-outline" href="{{ route('courses.index') }}">Explore courses <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
         </div>
     </section>
 

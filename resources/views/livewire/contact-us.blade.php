@@ -655,7 +655,7 @@
 
         function getQuickResponse(question) {
             const responses = {
-                'Course Pricing': 'Our course prices range from ₹2,999 to ₹6,999. Visit our Services page for detailed pricing.',
+                'Course Pricing': 'Courses are coming soon. Please stay tuned for launch details and pricing.',
                 'Trading Hours': 'Markets are open 24/7 for crypto. Forex and stocks have specific market hours. Check our trading hours guide.',
                 'Account Setup': 'Account setup takes 5 minutes. You\'ll need ID proof and address verification. Start at: quantumtrade.com/signup',
                 'VIP Telegram': 'VIP Telegram costs ₹1,999/month with real-time signals. Subscribe at: quantumtrade.com/vip'

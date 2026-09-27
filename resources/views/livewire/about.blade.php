@@ -9,7 +9,7 @@
                 </p>
                 <div class="about-hero-actions">
                     <a class="about-button about-button-primary" href="#our-approach">Our approach <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
-                    <a class="about-text-link" href="{{ route('services') }}">Explore services</a>
+                    <a class="about-text-link" href="{{ route('courses.index') }}">Explore courses</a>
                 </div>
             </div>
             <figure class="about-hero-figure">

@@ -21,8 +21,8 @@
                             href="{{ route('indicators.index') }}">Indicators</a></li>
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
                             href="{{ route('blogs.index') }}">Blogs</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}"
-                            href="{{ route('services') }}">Services</a></li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}"
+                            href="{{ route('courses.index') }}">Courses</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}"
                             href="{{ route('gallery') }}">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}"
