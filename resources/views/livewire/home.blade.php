@@ -281,10 +281,10 @@
     <!-- About the Platform -->
     <section class="section-container section-light" id="about">
         <div class="container">
-            <h2 class="section-title">About TradeWalla</h2>
+            <h2 class="section-title">About Genesis Block</h2>
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <p class="mb-4">TradeWalla is a premier multi-asset trading platform founded in 2015, serving
+                    <p class="mb-4">Genesis Block is a premier multi-asset trading platform founded in 2015, serving
                         over 2 million traders worldwide. Our mission is to democratize access to global financial
                         markets through technology, education, and transparent pricing.</p>
                     <p class="mb-4">We combine cutting-edge trading technology with institutional-grade security to
@@ -792,7 +792,7 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <p>"TradeWalla transformed my trading journey. The platform is intuitive, execution is
+                        <p>"Genesis Block transformed my trading journey. The platform is intuitive, execution is
                             lightning fast, and their educational resources helped me become a profitable trader."</p>
                         <div class="d-flex align-items-center mt-3">
                             <div class="me-3">
@@ -811,7 +811,7 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star-half-alt"></i>
                         </div>
-                        <p>"As a crypto trader, security is my top priority. TradeWalla's cold wallet storage and 2FA
+                        <p>"As a crypto trader, security is my top priority. Genesis Block's cold wallet storage and 2FA
                             give me peace of mind. The API access is also excellent for my algorithmic strategies."</p>
                         <div class="d-flex align-items-center mt-3">
                             <div class="me-3">
@@ -935,7 +935,7 @@
         <div class="container text-center">
             <h2 class="section-title text-center">Start Your Trading Journey Today</h2>
             <p class="mb-5" style="max-width: 700px; margin: 0 auto;">Join millions of traders who trust
-                TradeWalla for secure, reliable, and professional trading across global markets.</p>
+                Genesis Block for secure, reliable, and professional trading across global markets.</p>
             <div class="d-flex flex-wrap justify-content-center gap-3">
                 <button class="btn btn-primary btn-lg">Open Free Account</button>
                 <button class="btn btn-secondary btn-lg">Start Trading Now</button>

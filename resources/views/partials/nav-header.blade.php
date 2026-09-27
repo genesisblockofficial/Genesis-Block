@@ -2,8 +2,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/logo.jpg') }}" alt="Images">
-                <span>Trade</span><span>Walla</span>
+                <img src="{{ asset('images/logo.png') }}" alt="Genesis Block logo">
+                <span class="brand-name">Genesis Block</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>

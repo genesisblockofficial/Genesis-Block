@@ -52,16 +52,18 @@ body {
 
 .navbar-brand {
     font-weight: 700;
-    font-family: 'FontAwesome';
-    font-size: xx-large;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.75rem;
+    line-height: 1;
 }
 
-.navbar-brand span:first-child {
-    color: var(--text-light);
-}
-
-.navbar-brand span:last-child {
-    color: var(--green);
+.navbar-brand .brand-name {
+    margin-left: 0.65rem;
+    background: linear-gradient(100deg, #63AF31 0%, #A6D882 52%, #FFFFFF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
 }
 
 .navbar-brand img {

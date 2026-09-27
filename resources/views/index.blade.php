@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tradewalla | Professional Crypto, Forex & Stock Trading</title>
+    <title>Genesis Block | Professional Crypto, Forex & Stock Trading</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -63,15 +63,17 @@
 
         .navbar-brand {
             font-weight: 700;
+            font-family: 'Inter', sans-serif;
             font-size: 1.8rem;
+            line-height: 1;
         }
 
-        .navbar-brand span:first-child {
-            color: var(--text-light);
-        }
-
-        .navbar-brand span:last-child {
-            color: var(--green);
+        .navbar-brand .brand-name {
+            background: linear-gradient(100deg, #63AF31 0%, #A6D882 52%, #FFFFFF 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-link {
@@ -566,7 +568,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <span>Quantum</span><span>Trade</span>
+                <span class="brand-name">Genesis Block</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -633,10 +635,10 @@
     <!-- About the Platform -->
     <section class="section-container section-light" id="about">
         <div class="container">
-            <h2 class="section-title">About TradeWalla</h2>
+            <h2 class="section-title">About Genesis Block</h2>
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <p class="mb-4">TradeWalla is a premier multi-asset trading platform founded in 2015, serving
+                    <p class="mb-4">Genesis Block is a premier multi-asset trading platform founded in 2015, serving
                         over 2 million traders worldwide. Our mission is to democratize access to global financial
                         markets through technology, education, and transparent pricing.</p>
                     <p class="mb-4">We combine cutting-edge trading technology with institutional-grade security to
@@ -1144,7 +1146,7 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <p>"TradeWalla transformed my trading journey. The platform is intuitive, execution is
+                        <p>"Genesis Block transformed my trading journey. The platform is intuitive, execution is
                             lightning fast, and their educational resources helped me become a profitable trader."</p>
                         <div class="d-flex align-items-center mt-3">
                             <div class="me-3">
@@ -1163,7 +1165,7 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star-half-alt"></i>
                         </div>
-                        <p>"As a crypto trader, security is my top priority. TradeWalla's cold wallet storage and 2FA
+                        <p>"As a crypto trader, security is my top priority. Genesis Block's cold wallet storage and 2FA
                             give me peace of mind. The API access is also excellent for my algorithmic strategies."</p>
                         <div class="d-flex align-items-center mt-3">
                             <div class="me-3">
@@ -1287,7 +1289,7 @@
         <div class="container text-center">
             <h2 class="section-title text-center">Start Your Trading Journey Today</h2>
             <p class="mb-5" style="max-width: 700px; margin: 0 auto;">Join millions of traders who trust
-                TradeWalla for secure, reliable, and professional trading across global markets.</p>
+                Genesis Block for secure, reliable, and professional trading across global markets.</p>
             <div class="d-flex flex-wrap justify-content-center gap-3">
                 <button class="btn btn-primary btn-lg">Open Free Account</button>
                 <button class="btn btn-secondary btn-lg">Start Trading Now</button>
@@ -1380,7 +1382,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <div class="footer-logo">Quantum<span>Trade</span></div>
+                    <div class="footer-logo">Genesis<span> Block</span></div>
                     <p class="mb-4">The world's leading multi-asset trading platform. Trade cryptocurrencies, forex,
                         stocks, and commodities with institutional-grade tools and security.</p>
                     <div class="social-icons">
@@ -1435,11 +1437,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="copyright text-center">
-                        <p class="mb-2">© 2023 TradeWalla. All rights reserved.</p>
+                        <p class="mb-2">© 2023 Genesis Block. All rights reserved.</p>
                         <p class="small text-gray">Trading financial instruments carries significant risk of loss. Past
                             performance is not indicative of future results. Please read our Risk Disclosure before
                             trading.</p>
-                        <p class="small text-gray mt-2">TradeWalla is a registered trademark. TradeWalla LLC is
+                        <p class="small text-gray mt-2">Genesis Block is a registered trademark. Genesis Block LLC is
                             registered at 123 Trading Street, Financial District, New York, NY 10005, USA.</p>
                     </div>
                 </div>

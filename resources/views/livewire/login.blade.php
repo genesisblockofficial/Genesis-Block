@@ -3,7 +3,7 @@
         <div class="login-card">
             <!-- Logo -->
             <div class="logo-container">
-                <div class="logo">Tradewalla</div>
+                <div class="logo">Genesis Block</div>
                 <div class="logo-tagline">Secure Digital Asset Trading</div>
             </div>
 

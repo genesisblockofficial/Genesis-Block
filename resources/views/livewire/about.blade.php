@@ -8,7 +8,7 @@
                     <h1 class="about-title">{{ $aboutUs->main_heading ?? 'Redefining Trading Excellence' }}</h1>
                     <p class="about-subtitle">
                         {{ $aboutUs->sub_heading ??
-                            'QuantumTrade is a global leader in multi-asset trading, combining cutting-edge technology with deep market expertise to empower traders worldwide. Founded in 2015, weve grown to serve over 2 million traders across 150+ countries' }}
+                            'Genesis Block is a global leader in multi-asset trading, combining cutting-edge technology with deep market expertise to empower traders worldwide. Founded in 2015, weve grown to serve over 2 million traders across 150+ countries' }}
                     </p>
                     @if (!empty($aboutUs->_is_start_trading) || !empty($aboutUs->_is_view_our_mission))
                         <div class="about-cta-buttons">
@@ -109,7 +109,7 @@
                     <div class="timeline-year">2015</div>
                     <div class="timeline-content">
                         <h4>Foundation</h4>
-                        <p>QuantumTrade was founded by a team of former Wall Street traders and fintech experts.</p>
+                        <p>Genesis Block was founded by a team of former Wall Street traders and fintech experts.</p>
                     </div>
                 </div>
                 <div class="timeline-item">

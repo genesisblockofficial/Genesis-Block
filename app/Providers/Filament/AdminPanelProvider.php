@@ -28,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('Tradewalla Admin')
+            ->brandName('Genesis Block Admin')
             // ->brandLogo(asset('images/logo.png'))
             ->passwordReset()
             ->colors([

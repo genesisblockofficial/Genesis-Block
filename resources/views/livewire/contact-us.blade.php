@@ -244,7 +244,7 @@
                                 <div class="office-address">
                                     <i class="fas fa-map-marker-alt"></i>
                                     <div>
-                                        <p class="address-title">QuantumTrade Technologies Pvt. Ltd.</p>
+                                        <p class="address-title">Genesis Block Technologies Pvt. Ltd.</p>
                                         <p class="address-details">
                                             123 Trading Street,<br>
                                             Financial District,<br>

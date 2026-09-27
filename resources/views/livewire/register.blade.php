@@ -3,7 +3,7 @@
         <div class="register-card">
             <!-- Logo -->
             <div class="logo-container">
-                <div class="logo">Tradewalla</div>
+                <div class="logo">Genesis Block</div>
                 <div class="logo-tagline">Create Your Trading Account</div>
             </div>
 

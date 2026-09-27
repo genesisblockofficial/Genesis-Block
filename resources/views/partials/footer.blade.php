@@ -58,11 +58,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="copyright text-center">
-                    <p class="mb-2">© 2023 TradeWalla. All rights reserved.</p>
+                    <p class="mb-2">© 2023 Genesis Block. All rights reserved.</p>
                     <p class="small text-gray">Trading financial instruments carries significant risk of loss. Past
                         performance is not indicative of future results. Please read our Risk Disclosure before
                         trading.</p>
-                    <p class="small text-gray mt-2">TradeWalla is a registered trademark. TradeWalla LLC is
+                    <p class="small text-gray mt-2">Genesis Block is a registered trademark. Genesis Block LLC is
                         registered at 123 Trading Street, Financial District, New York, NY 10005, USA.</p>
                 </div>
             </div>
