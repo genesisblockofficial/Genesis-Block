@@ -1,194 +1,112 @@
-    <!-- Registration Container -->
-    <div class="register-container">
-        <div class="register-card">
-            <!-- Logo -->
-            <div class="logo-container">
-                <div class="logo">Genesis Block</div>
-                <div class="logo-tagline">Create Your Trading Account</div>
+<main class="auth-page">
+    <section class="container auth-layout register-layout" aria-labelledby="register-title">
+        <div class="auth-intro">
+            <p class="auth-eyebrow">GENESIS BLOCK <span>/</span> GET STARTED</p>
+            <div>
+                <h1 id="register-title">A thoughtful start.</h1>
+                <p>Create an account to keep your learning and resources together in one place.</p>
+            </div>
+            <p class="auth-note">Learn at your own pace. Explore with context.</p>
+        </div>
+
+        <div class="auth-form-panel">
+            <div class="auth-form-heading">
+                <p class="auth-eyebrow">ACCOUNT DETAILS</p>
+                <h2>Create your account</h2>
+                <p>Enter your details to get started.</p>
             </div>
 
-            <!-- Progress Steps -->
-            <div class="progress-steps">
-                <div class="step active">
-                    <div class="step-circle">1</div>
-                    <div class="step-label">Details</div>
-                </div>
-                <div class="step">
-                    <div class="step-circle">2</div>
-                    <div class="step-label">Security</div>
-                </div>
-                <div class="step">
-                    <div class="step-circle">3</div>
-                    <div class="step-label">Complete</div>
-                </div>
-            </div>
+            @if ($errors->any())
+                <div class="auth-error-summary" role="alert">{{ $errors->first() }}</div>
+            @endif
+            <div class="auth-error-summary" id="registration-error" role="alert" hidden></div>
 
-            <!-- Registration Form -->
-            <form wire:submit.prevent="register" id="registerForm">
-                <!-- Name Row -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label" for="firstName">
-                            <i class="fas fa-user me-2"></i>First Name*
-                        </label>
-                        <div class="input-group">
-                            <i class="fas fa-user-circle input-icon"></i>
-                            <input type="text" id="firstName" wire:model="firstName" class="form-control"
-                                placeholder="Enter first name">
-                        </div>
-                        @error('firstName')
-                            <div class="error-message">{{ $message }}</div>
-                        @enderror
+            <form wire:submit.prevent="register" class="auth-form register-form">
+                <div class="register-fields">
+                    <div class="auth-field">
+                        <label for="firstName">First name</label>
+                        <input id="firstName" type="text" wire:model.blur="firstName" autocomplete="given-name"
+                            placeholder="First name" required>
+                        @error('firstName') <span class="auth-field-error">{{ $message }}</span> @enderror
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label" for="lastName">
-                            <i class="fas fa-user me-2"></i>Last Name*
-                        </label>
-                        <div class="input-group">
-                            <i class="fas fa-user-circle input-icon"></i>
-                            <input type="text" id="lastName" wire:model="lastName" class="form-control"
-                                placeholder="Enter last name">
-                        </div>
-                        @error('lastName')
-                            <div class="error-message">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <!-- Email -->
-                    <div class="form-group">
-                        <label class="form-label" for="email">
-                            <i class="fas fa-envelope me-2"></i>Email Address*
-                        </label>
-                        <div class="input-group">
-                            <i class="fas fa-envelope input-icon"></i>
-                            <input type="email" id="email" wire:model="email" class="form-control"
-                                placeholder="Enter your email">
-                        </div>
-                        @error('email')
-                            <div class="error-message">{{ $message }}</div>
-                        @enderror
-                        @if (!$errors->has('email') && $email)
-                            <div class="success-message">✓ Email available</div>
-                        @endif
+                    <div class="auth-field">
+                        <label for="lastName">Last name</label>
+                        <input id="lastName" type="text" wire:model.blur="lastName" autocomplete="family-name"
+                            placeholder="Last name" required>
+                        @error('lastName') <span class="auth-field-error">{{ $message }}</span> @enderror
                     </div>
 
-                    <!-- Phone Number -->
-                    <div class="form-group">
-                        <label class="form-label" for="phoneNumber">
-                            <i class="fas fa-phone me-2"></i>Phone Number
-                        </label>
-                        <div class="input-group">
-                            <i class="fas fa-phone input-icon"></i>
-                            <input type="tel" id="phoneNumber" wire:model="phoneNumber" class="form-control"
-                                placeholder="+1 (123) 456-7890">
+                    <div class="auth-field">
+                        <label for="email">Email address</label>
+                        <input id="email" type="email" wire:model.blur="email" autocomplete="email"
+                            inputmode="email" placeholder="you@example.com" required>
+                        @error('email') <span class="auth-field-error">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="phoneNumber">Phone number <span class="auth-optional">Optional</span></label>
+                        <input id="phoneNumber" type="tel" wire:model.blur="phoneNumber" autocomplete="tel"
+                            inputmode="tel" placeholder="Your phone number">
+                        @error('phoneNumber') <span class="auth-field-error">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="password">Password</label>
+                        <div class="auth-password-wrap">
+                            <input id="password" type="password" wire:model="password" autocomplete="new-password"
+                                placeholder="At least 8 characters" required>
+                            <button class="auth-password-toggle" type="button" data-password-toggle="password"
+                                aria-label="Show password" title="Show password"><i class="fas fa-eye" aria-hidden="true"></i></button>
                         </div>
-                        @error('phoneNumber')
-                            <div class="error-message">{{ $message }}</div>
-                        @enderror
+                        @error('password') <span class="auth-field-error">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="auth-field">
+                        <label for="password_confirmation">Confirm password</label>
+                        <div class="auth-password-wrap">
+                            <input id="password_confirmation" type="password" wire:model="password_confirmation"
+                                autocomplete="new-password" placeholder="Re-enter your password" required>
+                            <button class="auth-password-toggle" type="button" data-password-toggle="password_confirmation"
+                                aria-label="Show password" title="Show password"><i class="fas fa-eye" aria-hidden="true"></i></button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <!-- Password -->
-                    <div class="form-group">
-                        <label class="form-label" for="password">
-                            <i class="fas fa-lock me-2"></i>Password*
-                        </label>
-                        <div class="input-group">
-                            <i class="fas fa-key input-icon"></i>
-                            <input type="password" id="password" wire:model="password" class="form-control"
-                                placeholder="Create a strong password">
-                            <button type="button" class="password-toggle" id="togglePassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="password-strength">
-                            <div class="strength-bar">
-                                <div class="strength-fill" id="strengthFill"></div>
-                            </div>
-                            <div class="strength-text" id="strengthText">Password strength</div>
-                        </div>
-                        @error('password')
-                            <div class="error-message">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Confirm Password -->
-                    <div class="form-group">
-                        <label class="form-label" for="password_confirmation">
-                            <i class="fas fa-lock me-2"></i>Confirm Password*
-                        </label>
-                        <div class="input-group">
-                            <i class="fas fa-key input-icon"></i>
-                            <input type="password" id="password_confirmation" wire:model="password_confirmation"
-                                class="form-control" placeholder="Re-enter your password">
-                            <button type="button" class="password-toggle" id="toggleConfirmPassword">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        @if ($password && $password_confirmation && $password === $password_confirmation)
-                            <div class="password-match" id="passwordMatch">
-                                <span class="match-icon"><i class="fas fa-check-circle"></i></span>
-                                <span class="match-text">Passwords match</span>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-
-                <!-- Terms & Conditions -->
-                <div class="terms-container">
-                    <div class="terms-checkbox">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms">
-                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy
-                                Policy</a>. I understand that cryptocurrency trading involves risk and I am responsible
-                            for my investment decisions.
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Register Button -->
-                <button type="submit" class="btn-register" id="registerBtn">
-                    <span id="btnText">Create Account</span>
-                    <div class="loading-spinner" id="loadingSpinner"></div>
+                <button class="auth-submit" type="submit" wire:loading.attr="disabled" wire:target="register">
+                    <span wire:loading.remove wire:target="register">Create account</span>
+                    <span wire:loading wire:target="register">Creating account...</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
                 </button>
-
-                <!-- Login Link -->
-                <div class="login-link">
-                    Already have an account?
-                    <a href="{{ route('login') }}" id="loginLink">Sign In</a>
-                </div>
             </form>
 
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            <!-- Security Indicators -->
-            <div class="security-indicators">
-                <div class="security-item">
-                    <i class="fas fa-shield-alt security-icon"></i>
-                    <span>256-bit Encryption</span>
-                </div>
-                <div class="security-item">
-                    <i class="fas fa-lock security-icon"></i>
-                    <span>2FA Enabled</span>
-                </div>
-                <div class="security-item">
-                    <i class="fas fa-user-shield security-icon"></i>
-                    <span>KYC Ready</span>
-                </div>
-            </div>
+            <p class="auth-register-prompt">Already have an account? <a href="{{ route('login') }}">Sign in</a></p>
         </div>
-    </div>
+    </section>
+</main>
+
+@script
+    <script>
+        document.querySelectorAll('[data-password-toggle]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const input = document.getElementById(button.dataset.passwordToggle);
+                const showingPassword = input.type === 'password';
+
+                input.type = showingPassword ? 'text' : 'password';
+                button.setAttribute('aria-label', showingPassword ? 'Hide password' : 'Show password');
+                button.setAttribute('title', showingPassword ? 'Hide password' : 'Show password');
+                button.innerHTML = `<i class="fas ${showingPassword ? 'fa-eye-slash' : 'fa-eye'}" aria-hidden="true"></i>`;
+            });
+        });
+
+        $wire.on('registration-success', (event) => {
+            window.location.href = event.detail.redirectUrl;
+        });
+
+        $wire.on('registration-error', (event) => {
+            const message = document.getElementById('registration-error');
+            message.textContent = event.detail.message;
+            message.hidden = false;
+        });
+    </script>
+@endscript

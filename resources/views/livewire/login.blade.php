@@ -1,95 +1,56 @@
-    <!-- Login Container -->
-    <div class="login-container">
-        <div class="login-card">
-            <!-- Logo -->
-            <div class="logo-container">
-                <div class="logo">Genesis Block</div>
-                <div class="logo-tagline">Secure Digital Asset Trading</div>
+<main class="auth-page">
+    <section class="container auth-layout" aria-labelledby="login-title">
+        <div class="auth-intro">
+            <p class="auth-eyebrow">GENESIS BLOCK <span>/</span> ACCOUNT ACCESS</p>
+            <div>
+                <h1 id="login-title">Welcome back.</h1>
+                <p>Continue exploring market education and resources from Genesis Block.</p>
+            </div>
+            <p class="auth-note">A place to learn, understand and think independently.</p>
+        </div>
+
+        <div class="auth-form-panel">
+            <div class="auth-form-heading">
+                <p class="auth-eyebrow">YOUR ACCOUNT</p>
+                <h2>Sign in</h2>
+                <p>Enter your account details to continue.</p>
             </div>
 
-            <!-- Login Form -->
-            <form id="loginForm">
-                <!-- Email -->
-                <div class="form-group">
-                    <label class="form-label" for="email">
-                        <i class="fas fa-envelope me-2"></i>Email Address
-                    </label>
-                    <div class="input-group">
-                        <i class="fas fa-user input-icon"></i>
-                        <input type="email" id="email" class="form-control" placeholder="Enter your email"
-                            required>
+            @if (session('status'))
+                <div class="auth-status" role="status">{{ session('status') }}</div>
+            @endif
+
+            @if ($errors->any())
+                <div class="auth-error-summary" role="alert">{{ $errors->first() }}</div>
+            @endif
+
+            <form method="POST" action="{{ route('login.store') }}" class="auth-form">
+                @csrf
+
+                <div class="auth-field">
+                    <label for="email">Email address</label>
+                    <input id="email" name="email" type="email" value="{{ old('email') }}"
+                        autocomplete="username" inputmode="email" placeholder="you@example.com" required autofocus>
+                </div>
+
+                <div class="auth-field">
+                    <div class="auth-field-heading">
+                        <label for="password">Password</label>
+                        <a href="{{ route('password.request') }}">Forgot password?</a>
                     </div>
-                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                    <input id="password" name="password" type="password" autocomplete="current-password"
+                        placeholder="Enter your password" required>
                 </div>
 
-                <!-- Password -->
-                <div class="form-group">
-                    <label class="form-label" for="password">
-                        <i class="fas fa-lock me-2"></i>Password
-                    </label>
-                    <div class="input-group">
-                        <i class="fas fa-key input-icon"></i>
-                        <input type="password" id="password" class="form-control" placeholder="Enter your password"
-                            required>
-                        <button type="button" class="password-toggle" id="togglePassword">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                    </div>
-                    <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
-                </div>
+                <label class="auth-remember" for="remember">
+                    <input id="remember" name="remember" type="checkbox" value="1" @checked(old('remember'))>
+                    <span>Remember me</span>
+                </label>
 
-                <!-- Remember Me & Forgot Password -->
-                <div class="remember-forgot">
-                    <div class="remember-me" id="rememberMe">
-                        <div class="checkbox"></div>
-                        <span>Remember me</span>
-                    </div>
-                    <a href="#" class="forgot-link">Forgot Password?</a>
-                </div>
-
-                <!-- Login Button -->
-                <button type="submit" class="btn-login" id="loginBtn">
-                    <span id="btnText">Sign In</span>
-                    <div class="loading-spinner" id="loadingSpinner"></div>
-                    <div class="success-check" id="successCheck">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                </button>
-
-                <!-- Divider -->
-                <div class="divider">
-                    <span class="divider-text">Or Continue With</span>
-                </div>
-
-                <!-- Social Login -->
-                <div class="social-login">
-                    <button type="button" class="btn-social">
-                        <i class="fab fa-google social-icon google"></i>
-                        <span>Google</span>
-                    </button>
-                    <button type="button" class="btn-social">
-                        <i class="fab fa-apple social-icon apple"></i>
-                        <span>Apple</span>
-                    </button>
-                </div>
-
-                <!-- Sign Up Link -->
-                <div class="signup-link">
-                    Don't have an account?
-                    <a href="{{ route('register') }}">Create Account</a>
-                </div>
+                <button class="auth-submit" type="submit">Sign in <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
             </form>
 
-            <!-- Security Indicators -->
-            <div class="security-indicators">
-                <div class="security-item">
-                    <i class="fas fa-shield-alt security-icon"></i>
-                    <span>256-bit Encryption</span>
-                </div>
-                <div class="security-item">
-                    <i class="fas fa-lock security-icon"></i>
-                    <span>2FA Ready</span>
-                </div>
-            </div>
+            <p class="auth-register-prompt">New to Genesis Block? <a href="{{ route('register') }}">Create an account</a></p>
         </div>
-    </div>
+    </section>
+</main>
