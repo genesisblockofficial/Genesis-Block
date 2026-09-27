@@ -8,6 +8,6 @@ class Home extends Component
 {
     public function render()
     {
-        return view('livewire.home')->layout('layout.app');
+        return view('livewire.homepage')->layout('layout.app');
     }
 }
