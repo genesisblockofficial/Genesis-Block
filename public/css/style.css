@@ -4381,6 +4381,381 @@ body {
     text-align: center;
 }
 
+.about-page {
+    --about-ink: #202920;
+    --about-muted: #5d685c;
+    --about-green: #397a31;
+    color: var(--about-ink);
+    background: #fbfcfa;
+}
+
+.about-page h1,
+.about-page h2,
+.about-page h3,
+.about-page p,
+.about-page figure {
+    margin-top: 0;
+}
+
+.about-hero {
+    padding: 126px 0 2rem;
+    margin-bottom: 0;
+    background: #f2f5ef;
+}
+
+.about-hero-layout {
+    display: grid;
+    grid-template-columns: 1fr 0.94fr;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5.5rem);
+}
+
+.about-eyebrow,
+.about-index {
+    margin-bottom: 1rem;
+    color: var(--about-green);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.about-eyebrow span {
+    padding: 0 0.3rem;
+    color: #92a38c;
+}
+
+.about-hero h1,
+.about-page h2 {
+    margin-bottom: 1.2rem;
+    color: var(--about-ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 3.35rem;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.about-hero h1 span,
+.about-page h2 span {
+    color: var(--about-green);
+}
+
+.about-hero-description {
+    max-width: 540px;
+    margin-bottom: 1.7rem;
+    color: var(--about-muted);
+    font-size: 1.02rem;
+    line-height: 1.8;
+}
+
+.about-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.3rem;
+}
+
+.about-button {
+    display: inline-flex;
+    min-height: 47px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.7rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.about-button:hover {
+    transform: translateY(-2px);
+}
+
+.about-button-primary {
+    background: var(--about-green);
+    color: #fff;
+}
+
+.about-button-primary:hover {
+    background: #2e6728;
+    color: #fff;
+}
+
+.about-text-link {
+    color: var(--about-ink);
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.about-text-link:hover {
+    color: var(--about-green);
+}
+
+.about-hero-figure {
+    margin-bottom: 0;
+}
+
+.about-hero-figure img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1.15;
+    object-fit: cover;
+}
+
+.about-hero-figure figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.8rem;
+    color: #687466;
+    font-size: 0.7rem;
+}
+
+.about-approach,
+.about-values,
+.about-journey,
+.about-team {
+    padding: 5.5rem 0;
+}
+
+.about-approach,
+.about-team {
+    background: #fff;
+}
+
+.about-section-intro {
+    margin-bottom: 2.5rem;
+}
+
+.about-page h2 {
+    margin-bottom: 0;
+    font-size: 2.75rem;
+}
+
+.about-purpose-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+}
+
+.about-purpose-grid article {
+    padding-top: 1.3rem;
+    border-top: 1px solid #cfd8cb;
+}
+
+.about-index {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: #688e59;
+    font-size: 0.7rem;
+}
+
+.about-page h3 {
+    margin-bottom: 0.65rem;
+    color: var(--about-ink);
+    font-size: 1.25rem;
+    font-weight: 650;
+}
+
+.about-purpose-grid p,
+.about-value-item p,
+.about-journey-list p,
+.about-team-member-copy > p:last-child,
+.about-contact-layout > div:last-child > p {
+    margin-bottom: 0;
+    color: var(--about-muted);
+    font-size: 0.93rem;
+    line-height: 1.75;
+}
+
+.about-values {
+    background: #f2f5ef;
+}
+
+.about-values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.4rem;
+}
+
+.about-value-item {
+    min-width: 0;
+    padding: 1.2rem 1rem 0 0;
+    border-top: 2px solid #82ad70;
+}
+
+.about-value-item h3 {
+    font-size: 1.08rem;
+}
+
+.about-value-item p {
+    font-size: 0.87rem;
+}
+
+.about-journey-list {
+    border-top: 1px solid #d4ddd0;
+}
+
+.about-journey-list article {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1.5rem;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid #d4ddd0;
+}
+
+.about-journey-year {
+    color: var(--about-green);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.5rem;
+}
+
+.about-journey-list h3 {
+    margin-bottom: 0.3rem;
+}
+
+.about-team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.3rem;
+}
+
+.about-team-member {
+    min-width: 0;
+}
+
+.about-team-member > img,
+.about-team-placeholder {
+    display: grid;
+    width: 100%;
+    aspect-ratio: 1.1;
+    object-fit: cover;
+    place-items: center;
+    background: #e7eee3;
+    color: #54784b;
+    font-size: 2rem;
+}
+
+.about-team-member-copy {
+    padding-top: 1rem;
+}
+
+.about-team-member-copy h3 {
+    margin-bottom: 0.2rem;
+}
+
+.about-team-role {
+    margin-bottom: 0.55rem !important;
+    color: var(--about-green) !important;
+    font-size: 0.82rem !important;
+    font-weight: 650;
+}
+
+.about-contact {
+    padding: 4.5rem 0;
+    color: #f3f5f0;
+    background: #294c2d;
+}
+
+.about-contact .about-eyebrow {
+    color: #b8df9e;
+}
+
+.about-contact h2 {
+    color: #f3f5f0;
+}
+
+.about-contact h2 span {
+    color: #b8df9e;
+}
+
+.about-contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 0.7fr;
+    align-items: center;
+    gap: 3rem;
+}
+
+.about-contact-layout > div:last-child > p {
+    margin-bottom: 1.2rem;
+    color: #d2dfce;
+}
+
+.about-button-light {
+    background: #f3f5f0;
+    color: #243d25;
+}
+
+.about-button-light:hover {
+    background: #dcebd3;
+    color: #243d25;
+}
+
+@media (max-width: 991.98px) {
+    .about-hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .about-values-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767.98px) {
+    .about-hero {
+        padding-top: 100px;
+    }
+
+    .about-hero-layout,
+    .about-contact-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about-hero h1 {
+        font-size: 2.45rem;
+    }
+
+    .about-page h2 {
+        font-size: 2.25rem;
+    }
+
+    .about-approach,
+    .about-values,
+    .about-journey,
+    .about-team {
+        padding: 4rem 0;
+    }
+
+    .about-purpose-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .about-team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 575.98px) {
+    .about-hero h1 {
+        font-size: 2.1rem;
+    }
+
+    .about-values-grid,
+    .about-team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-journey-list article {
+        grid-template-columns: 75px 1fr;
+        gap: 1rem;
+    }
+}
+
 .register-form {
     gap: 1.5rem;
 }

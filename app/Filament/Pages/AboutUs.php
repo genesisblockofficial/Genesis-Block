@@ -99,7 +99,7 @@ class AboutUs extends Page
                         Forms\Components\RichEditor::make('mission')
                             ->label('Mission'),
 
-                        Forms\Components\RichEditor::make('vision')
+                        Forms\Components\RichEditor::make('vission')
                             ->label('Vision'),
                     ]),
 

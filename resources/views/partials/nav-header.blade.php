@@ -14,7 +14,7 @@
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
                             href="{{ route('home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('about-us') ? 'active' : '' }}"
-                            href="{{ route('about-us') }}">About</a></li>
+                            href="{{ route('about-us') }}">About Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#resources">Resources</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#indicators">Indicators</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#blogs">Blogs</a></li>
