@@ -17,7 +17,8 @@
                             href="{{ route('about-us') }}">About Us</a></li>
                             <li class="nav-item"><a class="nav-link {{ request()->routeIs('resources') ? 'active' : '' }}"
                                 href="{{ route('resources') }}">Resources</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#indicators">Indicators</a></li>
+                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('indicators.*') ? 'active' : '' }}"
+                            href="{{ route('indicators.index') }}">Indicators</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}#blogs">Blogs</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('services') ? 'active' : '' }}"
                             href="{{ route('services') }}">Services</a></li>

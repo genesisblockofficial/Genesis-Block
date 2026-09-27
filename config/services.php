@@ -22,6 +22,17 @@ return [
         'key' => env('RESEND_API_KEY'),
     ],
 
+    'stripe' => [
+        'mode' => env('STRIPE_MODE', 'test'),
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+    ],
+
+    'indicator_access' => [
+        'admin_email' => env('INDICATOR_ADMIN_EMAIL'),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
