@@ -6,7 +6,7 @@
                 <h1>Understand the market.<br><span>Build your own perspective.</span></h1>
                 <p class="home-lead">Clear explainers, practical learning and thoughtful market context for people who want to understand how financial markets work.</p>
                 <div class="home-hero-actions">
-                    <a class="home-button home-button-primary" href="#resources">Explore resources <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="home-button home-button-primary" href="{{ route('resources') }}">Explore resources <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                     <a class="home-text-link" href="{{ route('about-us') }}">Get to know us</a>
                 </div>
                 <p class="home-note">Education and information. Not brokerage or investment advice.</p>
@@ -52,6 +52,7 @@
                     <div><h3>Risk awareness</h3><p>Understand uncertainty, risk and why thoughtful decisions start with knowing what you do not know.</p></div>
                 </article>
             </div>
+            <a class="home-inline-link home-resource-library-link" href="{{ route('resources') }}">Browse recommended brokers and books <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </div>
     </section>
 
