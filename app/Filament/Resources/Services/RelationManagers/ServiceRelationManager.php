@@ -25,23 +25,23 @@ class ServiceRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $title = 'Service Details';
+    protected static ?string $title = 'Course Detail';
 
-    protected static ?string $label = 'Service Detail';
+    protected static ?string $label = 'Course Detail';
 
-    protected static ?string $pluralLabel = 'Service Details';
+    protected static ?string $pluralLabel = 'Course Details';
 
     public function form(Schema $form): Schema
     {
         return $form
             ->schema([
                 TextInput::make('title')
-                    ->label('Detail Title')
+                    ->label('Course Detail Title')
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
                 RichEditor::make('description')
-                    ->label('Detail Description')
+                    ->label('Course Detail Description')
                     ->maxLength(500)
                     ->columnSpanFull(),
             ]);
@@ -64,9 +64,7 @@ class ServiceRelationManager extends RelationManager
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->filters([
-                TernaryFilter::make('is_active'),
-            ])
+            ->filters([])
             ->headerActions([
                 CreateAction::make(),
             ])

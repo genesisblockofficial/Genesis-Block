@@ -20,10 +20,12 @@ class ServicesTable
         return $table
             ->columns([
                 TextColumn::make('title')
+                    ->label('Course')
                     ->searchable(),
                 ImageColumn::make('image')
                     ->searchable(),
                 IconColumn::make('is_active')
+                    ->label('Published')
                     ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()

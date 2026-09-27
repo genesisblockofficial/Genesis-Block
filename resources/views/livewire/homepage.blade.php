@@ -25,7 +25,7 @@
             <div>
                 <h2>Markets are complex.<br><span>Learning should feel clear.</span></h2>
                 <div class="home-about-copy">
-                    <p>Genesis Block brings learning resources, market concepts and educational services together in one place. Start with the basics, explore how indicators are used, and build your understanding at your own pace.</p>
+                    <p>Genesis Block brings learning resources and market concepts together in one place. Start with the basics, explore how indicators are used, and build your understanding at your own pace.</p>
                     <a class="home-inline-link" href="{{ route('about-us') }}">More about Genesis Block <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <p class="home-eyebrow">TOOLS, WITH CONTEXT</p>
                 <h2>Indicators are a lens,<br><span>not a crystal ball.</span></h2>
                 <p>Technical indicators can help describe market behaviour. Learn what they measure, where they can mislead, and how to interpret them as part of a wider view.</p>
-                <a class="home-inline-link" href="{{ route('services') }}">Explore learning services <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                <a class="home-inline-link" href="{{ route('courses.index') }}">Explore courses <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
             <div class="home-indicator-topics">
                 <article><span>01</span><div><h3>Trend</h3><p>Explore direction and the structure of price movement.</p></div></article>
@@ -97,7 +97,7 @@
     <section class="home-contact home-section" id="contact">
         <div class="container home-contact-layout">
             <div><p class="home-eyebrow">HAVE A QUESTION?</p><h2>Let's start<br><span>a conversation.</span></h2></div>
-            <div><p>For questions about Genesis Block, our educational services or the resources on this site, get in touch with our team.</p><a class="home-button home-button-light" href="{{ route('contact-us') }}">Contact us <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+            <div><p>For questions about Genesis Block, upcoming courses or the resources on this site, get in touch with our team.</p><a class="home-button home-button-light" href="{{ route('contact-us') }}">Contact us <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
         </div>
     </section>
 </main>

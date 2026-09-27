@@ -22,9 +22,17 @@ class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::Cog;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::BookOpen;
 
-    protected static ?string $recordTitleAttribute = 'Service';
+    protected static ?string $navigationLabel = 'Courses';
+
+    protected static ?string $slug = 'courses';
+
+    protected static ?string $modelLabel = 'course';
+
+    protected static ?string $pluralModelLabel = 'courses';
+
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static string|UnitEnum|null $navigationGroup = 'Website CRM';
 

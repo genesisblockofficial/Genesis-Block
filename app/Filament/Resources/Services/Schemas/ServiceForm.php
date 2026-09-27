@@ -18,16 +18,17 @@ class ServiceForm
                 TextInput::make('title')
                     ->required()
                     ->maxLength(255)
-                    ->label('Service Title'),
+                    ->label('Course Title'),
                 Toggle::make('is_active')
-                    ->label('Active Service')
+                    ->label('Publish Course')
                     ->inline(false)
                     ->required(),
                 FileUpload::make('image')
-                    ->helperText('Recommended: 100x100 px, max 1MB')
-                    ->label('Service Images')
+                    ->helperText('Recommended course cover image, max 1MB')
+                    ->label('Course Cover')
                     ->columnSpanFull(),
                 RichEditor::make('description')
+                    ->label('Course Overview')
                     ->columnSpanFull(),
             ]);
     }

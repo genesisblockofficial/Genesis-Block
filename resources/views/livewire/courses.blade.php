@@ -1,4 +1,5 @@
 <main class="courses-page">
+    @if ($courses->isEmpty())
     <section class="courses-coming-soon">
         <div class="container courses-coming-soon-layout">
             <div>
@@ -21,4 +22,40 @@
             </aside>
         </div>
     </section>
+    @else
+        <section class="courses-catalog">
+            <div class="container">
+                <header class="courses-catalog-heading">
+                    <p class="courses-eyebrow">GENESIS BLOCK <span>/</span> LEARNING</p>
+                    <h1>Courses for<br><span>steady progress.</span></h1>
+                    <p>Explore our learning programs and choose a topic that fits where you are today.</p>
+                </header>
+                <div class="courses-grid">
+                    @foreach ($courses as $course)
+                        <article class="course-card">
+                            @if ($course->image)
+                                <img src="{{ asset('storage/' . ltrim($course->image, '/')) }}" alt="{{ $course->title }} course cover" loading="lazy">
+                            @else
+                                <div class="course-card-placeholder" aria-hidden="true"><i class="fas fa-book-open"></i></div>
+                            @endif
+                            <div class="course-card-content">
+                                <span class="course-card-label">COURSE</span>
+                                <h2>{{ $course->title }}</h2>
+                                @if ($course->description)
+                                    <p>{{ strip_tags($course->description) }}</p>
+                                @endif
+                                @if ($course->serviceDetails)
+                                    <div class="course-card-detail">
+                                        <h3>{{ $course->serviceDetails->title }}</h3>
+                                        <p>{{ strip_tags($course->serviceDetails->description ?? '') }}</p>
+                                    </div>
+                                @endif
+                                <a href="{{ route('contact-us') }}" class="courses-button">Ask about this course <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 </main>
