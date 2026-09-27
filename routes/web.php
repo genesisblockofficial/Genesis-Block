@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\About;
+use App\Livewire\BlogArticle;
+use App\Livewire\BlogIndex;
 use App\Livewire\ContactUs;
 use App\Livewire\Gallery;
 use App\Livewire\Home;
@@ -29,6 +31,8 @@ Route::get('login', Login::class)->name('login');
 Route::get('register', Register::class)->name('register');
 Route::get('resources', Resources::class)->name('resources');
 Route::get('indicators', IndicatorCatalog::class)->name('indicators.index');
+Route::get('blogs', BlogIndex::class)->name('blogs.index');
+Route::get('blogs/{slug}', BlogArticle::class)->name('blogs.show');
 Route::post('indicators/{indicator}/free-request', [IndicatorAccessRequestController::class, 'store'])
 	->middleware('throttle:5,1')
 	->name('indicators.free-request');

@@ -90,7 +90,7 @@
     <section class="home-insights home-section" id="blogs">
         <div class="container home-insights-layout">
             <div><p class="home-eyebrow">IDEAS AND PERSPECTIVES</p><h2>Make room for<br><span>better questions.</span></h2></div>
-            <div><p>Our articles and news bring together explainers and market developments to help you keep learning and stay curious.</p><a class="home-button home-button-primary" href="{{ route('news') }}">Read blogs and news <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+            <div><p>Read ideas, explainers and perspectives published by the Genesis Block team to keep learning and stay curious.</p><a class="home-button home-button-primary" href="{{ route('blogs.index') }}">Explore the blog <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
         </div>
     </section>
 
