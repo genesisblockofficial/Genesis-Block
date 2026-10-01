@@ -6,9 +6,9 @@
 
         {{ $this->form }}
 
-        <div class="flex justify-end mt-6">
-            <x-filament::button wire:click="save" wire:loading.attr="disabled">
-                Save calendar settings
+        <div class="flex" style="justify-content: flex-end; margin-top: 1.5rem;">
+            <x-filament::button wire:click="save">
+                Save Changes
             </x-filament::button>
         </div>
     </div>
