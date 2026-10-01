@@ -16,12 +16,15 @@ class IndicatorAccessLink extends Mailable
         public string $indicatorName,
         public string $accessUrl,
         public string $deliveryType,
+        public string $subject,
+        public string $body,
+        public string $recipientEmail,
     ) {}
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your TradingView access: ' . $this->indicatorName,
+            subject: $this->subject,
         );
     }
 

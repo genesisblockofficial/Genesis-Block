@@ -5,6 +5,8 @@ namespace App\Filament\Resources\IndicatorPurchases\Tables;
 use App\Models\IndicatorPurchase;
 use App\Services\IndicatorAccessDelivery;
 use Filament\Actions\Action;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -47,11 +49,20 @@ class IndicatorPurchasesTable
                     ->label('Approve & send access')
                     ->icon('heroicon-o-paper-airplane')
                     ->color('success')
+                    ->form([
+                        TextInput::make('subject')
+                            ->required()
+                            ->default(fn (): string => app(IndicatorAccessDelivery::class)->template()['subject']),
+                        RichEditor::make('body')
+                            ->required()
+                            ->default(fn (): string => app(IndicatorAccessDelivery::class)->template()['body'])
+                            ->helperText('Personalize this email for this user. Placeholders: {{indicator_name}}, {{access_url}}, {{delivery_type}}, {{recipient_email}}.'),
+                    ])
                     ->requiresConfirmation()
                     ->visible(fn (IndicatorPurchase $record): bool => $record->status === 'paid')
-                    ->action(function (IndicatorPurchase $record): void {
+                    ->action(function (IndicatorPurchase $record, array $data): void {
                         try {
-                            app(IndicatorAccessDelivery::class)->sendPaidPurchaseAccess($record);
+                            app(IndicatorAccessDelivery::class)->sendPaidPurchaseAccess($record, $data);
 
                             Notification::make()->title('Access email sent')->success()->send();
                         } catch (Throwable $exception) {
