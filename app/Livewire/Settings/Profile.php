@@ -51,6 +51,7 @@ class Profile extends Component
 
         $user->save();
 
+        Session::flash('status', 'profile-updated');
         $this->dispatch('profile-updated', name: $user->name);
     }
 
@@ -70,5 +71,10 @@ class Profile extends Component
         $user->sendEmailVerificationNotification();
 
         Session::flash('status', 'verification-link-sent');
+    }
+
+    public function render()
+    {
+        return view('livewire.settings.profile')->layout('layout.app');
     }
 }

@@ -9,6 +9,7 @@ use App\Services\StripeCheckoutService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Throwable;
 
@@ -27,6 +28,7 @@ class IndicatorCheckoutController
         }
 
         $purchase = IndicatorPurchase::create([
+            'user_id' => Auth::id(),
             'indicator_id' => $indicator->id,
             'indicator_name' => $indicator->name,
             'email' => $data['email'],

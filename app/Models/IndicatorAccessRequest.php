@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class IndicatorAccessRequest extends Model
 {
     protected $fillable = [
+        'user_id',
         'indicator_id',
         'indicator_name',
         'name',
@@ -27,5 +28,10 @@ class IndicatorAccessRequest extends Model
     public function indicator(): BelongsTo
     {
         return $this->belongsTo(Indicator::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

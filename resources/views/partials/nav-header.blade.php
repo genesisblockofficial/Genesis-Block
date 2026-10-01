@@ -31,8 +31,15 @@
                             href="{{ route('contact-us') }}">Contact Us</a></li>
                 </ul>
                 <div class="navbar-actions">
-                    <a href="{{ route('login') }}" class="navbar-login">Login</a>
-                    <a href="{{ route('register') }}" class="navbar-register">Register</a>
+                    @auth
+                        <a href="{{ route('account') }}" class="navbar-profile-avatar"
+                            aria-label="Open {{ auth()->user()->name }}'s profile"
+                            title="{{ auth()->user()->name }}">
+                            {{ auth()->user()->initials() }}
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="get-started-button navbar-register group/button inline-flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 border-2 border-transparent bg-brand-blue text-brand-primary-text hover:bg-brand-hover active:bg-brand-pressed active:border-brand-primary-bg-3 disabled:border-transparent disabled:bg-brand-disabled-bg disabled:text-brand-disabled-text disabled:opacity-100 h-9 gap-1 rounded-lg px-3.5 py-2 body-b3-medium rounded-xl px-4 py-2.5">Get Started</a>
+                    @endauth
                 </div>
             </div>
         </div>

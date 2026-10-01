@@ -45,6 +45,10 @@ Route::get('indicators/purchases/{purchase}/result', [IndicatorCheckoutControlle
 	->name('indicators.payment-result');
 Route::post('stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
 Route::get('news', News::class)->name('news');
+Route::get('account', \App\Livewire\AccountDashboard::class)
+	->middleware('auth')
+	->name('account');
+Route::get('profile', Profile::class)->middleware('auth')->name('profile');
 Route::get('api/news/economic-calendar', EconomicCalendarController::class)
 	->middleware('throttle:30,1')
 	->name('api.news.economic-calendar');

@@ -7,6 +7,7 @@ use App\Models\IndicatorAccessRequest;
 use App\Services\IndicatorAccessDelivery;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Throwable;
 
@@ -23,6 +24,7 @@ class IndicatorAccessRequestController
         ]);
 
         $accessRequest = IndicatorAccessRequest::create([
+            'user_id' => Auth::id(),
             'indicator_id' => $indicator->id,
             'indicator_name' => $indicator->name,
             'name' => $data['name'] ?? null,
