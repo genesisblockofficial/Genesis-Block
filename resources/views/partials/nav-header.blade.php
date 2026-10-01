@@ -15,17 +15,22 @@
                             href="{{ route('home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('about-us') ? 'active' : '' }}"
                             href="{{ route('about-us') }}">About Us</a></li>
-                            <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('resources') ? 'active' : '' }}"
-                                href="{{ route('resources') }}">Resources</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {{ request()->routeIs('indicators.*', 'faqs') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Indicators</a>
+                        <a class="nav-link dropdown-toggle {{ request()->routeIs('resources', 'faqs') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resources</a>
                         <ul class="dropdown-menu navbar-dropdown-menu">
-                            <li><a data-auth-gate class="dropdown-item" href="{{ route('indicators.index') }}">Indicators</a></li>
+                            <li><a data-auth-gate class="dropdown-item" href="{{ route('resources') }}">Resources</a></li>
                             <li><a data-auth-gate class="dropdown-item" href="{{ route('faqs') }}">FAQs</a></li>
                         </ul>
                     </li>
-                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
-                            href="{{ route('blogs.index') }}">Blogs</a></li>
+                    <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('indicators.*') ? 'active' : '' }}"
+                        href="{{ route('indicators.index') }}">Indicators</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ request()->routeIs('blogs.*', 'journey') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Blogs</a>
+                        <ul class="dropdown-menu navbar-dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('blogs.index') }}">Blogs</a></li>
+                            <li><a data-auth-gate class="dropdown-item" href="{{ route('journey') }}">Journey</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {{ request()->routeIs('courses.*', 'journal') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Courses</a>
                         <ul class="dropdown-menu navbar-dropdown-menu">
@@ -33,8 +38,13 @@
                             <li><a data-auth-gate class="dropdown-item" href="{{ route('journal') }}">My Journal</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}"
-                            href="{{ route('gallery') }}">Gallery</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ request()->routeIs('gallery', 'team-members') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Gallery</a>
+                        <ul class="dropdown-menu navbar-dropdown-menu">
+                            <li><a data-auth-gate class="dropdown-item" href="{{ route('gallery') }}">Gallery</a></li>
+                            <li><a data-auth-gate class="dropdown-item" href="{{ route('team-members') }}">Team Members</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}"
                             href="{{ route('news') }}">News</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact-us') ? 'active' : '' }}"
