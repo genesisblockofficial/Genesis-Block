@@ -9,13 +9,18 @@ uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
 test('reset password link screen can be rendered', function () {
     $response = $this->get(route('password.request'));
 
-    $response->assertStatus(200);
+    $response->assertStatus(200)
+        ->assertSee('href="http://localhost/css/style.css"', false)
+        ->assertSee('class="site-footer"', false);
 });
 
 test('reset password link can be requested', function () {
     Notification::fake();
 
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'first_name' => 'Reset',
+        'last_name' => 'Request',
+    ]);
 
     $this->post(route('password.request'), ['email' => $user->email]);
 
@@ -25,13 +30,18 @@ test('reset password link can be requested', function () {
 test('reset password screen can be rendered', function () {
     Notification::fake();
 
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'first_name' => 'Reset',
+        'last_name' => 'Screen',
+    ]);
 
     $this->post(route('password.request'), ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
         $response = $this->get(route('password.reset', $notification->token));
-        $response->assertStatus(200);
+        $response->assertStatus(200)
+            ->assertSee('href="http://localhost/css/style.css"', false)
+            ->assertSee('name="token"', false);
 
         return true;
     });
@@ -40,7 +50,10 @@ test('reset password screen can be rendered', function () {
 test('password can be reset with valid token', function () {
     Notification::fake();
 
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'first_name' => 'Reset',
+        'last_name' => 'Password',
+    ]);
 
     $this->post(route('password.request'), ['email' => $user->email]);
 
