@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\IndicatorAccessRequest;
 use App\Models\IndicatorPurchase;
+use App\Models\TradeJournal;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -40,9 +41,17 @@ class AccountDashboard extends Component
             ->unique(fn ($access) => $access->indicator->id)
             ->values();
 
+        $journalEntries = TradeJournal::query()
+            ->where('user_id', $user->id)
+            ->latest('trade_date')
+            ->latest('id')
+            ->limit(3)
+            ->get();
+
         return view('livewire.account-dashboard', [
             'user' => $user,
             'indicators' => $indicators,
+            'journalEntries' => $journalEntries,
         ])->layout('layout.app');
     }
 

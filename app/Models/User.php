@@ -77,6 +77,11 @@ class User extends Authenticatable
         return $this->hasMany(IndicatorAccessRequest::class);
     }
 
+    public function tradeJournals(): HasMany
+    {
+        return $this->hasMany(TradeJournal::class);
+    }
+
 
     protected static function booted()
     {

@@ -53,6 +53,20 @@
                 <div><p class="account-eyebrow">LEARNING PATH</p><h2>My courses</h2></div>
             </div>
             <div class="account-empty-state account-course-state"><i class="fas fa-graduation-cap" aria-hidden="true"></i><div><span class="account-coming-soon">Coming soon</span><h3>Courses are on the way</h3><p>Your enrolled courses, progress and saved lessons will appear here when the course library launches.</p></div><a class="account-browse-link" href="{{ route('courses.index') }}">View courses <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+
+            <div class="account-section-heading account-journal-heading">
+                <div><p class="account-eyebrow">TRADING PROCESS</p><h2>My journal</h2></div>
+                <a class="account-browse-link" href="{{ route('journal') }}">Open journal <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+            @if ($journalEntries->isNotEmpty())
+                <div class="account-journal-list">
+                    @foreach ($journalEntries as $entry)
+                        <article class="account-journal-row"><div><time>{{ $entry->trade_date->format('M j, Y') }}</time><strong>{{ $entry->symbol }}</strong><span>{{ $entry->setup }}</span></div><span class="journal-result journal-result-{{ $entry->result }}">{{ ucfirst($entry->result) }}</span></article>
+                    @endforeach
+                </div>
+            @else
+                <div class="account-empty-state account-journal-empty"><i class="fas fa-book-open" aria-hidden="true"></i><div><h3>Start your trading journal</h3><p>Record your setups, execution and results to build a repeatable trading process.</p></div><a class="account-browse-link" href="{{ route('journal') }}">Create first entry <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+            @endif
         </div>
     </section>
 </main>

@@ -21,8 +21,13 @@
                             href="{{ route('indicators.index') }}">Indicators</a></li>
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
                             href="{{ route('blogs.index') }}">Blogs</a></li>
-                        <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}"
-                            href="{{ route('courses.index') }}">Courses</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ request()->routeIs('courses.*', 'journal') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Courses</a>
+                        <ul class="dropdown-menu navbar-dropdown-menu">
+                            <li><a data-auth-gate class="dropdown-item" href="{{ route('courses.index') }}">Courses</a></li>
+                            <li><a data-auth-gate class="dropdown-item" href="{{ route('journal') }}">My Journal</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}"
                             href="{{ route('gallery') }}">Gallery</a></li>
                     <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}"
