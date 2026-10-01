@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Indicator;
 use App\Models\IndicatorPurchase;
-use App\Services\StripeCredentials;
 use App\Services\StripeCheckoutService;
+use App\Services\StripeCredentials;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Throwable;
@@ -27,6 +26,14 @@ class IndicatorCheckoutController
             return back()->withErrors(['checkout' => 'This indicator does not have a valid paid price yet.']);
         }
 
+        $activeCredentials = $credentials->active();
+
+        if (! filled($activeCredentials['secret'])) {
+            return back()
+                ->withInput($request->only('email'))
+                ->withErrors(['checkout' => 'Secure checkout is not configured yet. An admin must add a Stripe secret key under Admin → Stripe Settings.']);
+        }
+
         $purchase = IndicatorPurchase::create([
             'user_id' => Auth::id(),
             'indicator_id' => $indicator->id,
@@ -34,7 +41,7 @@ class IndicatorCheckoutController
             'email' => $data['email'],
             'amount_cents' => $indicator->price_cents,
             'currency' => 'usd',
-            'stripe_environment' => $credentials->active()['environment'],
+            'stripe_environment' => $activeCredentials['environment'],
             'status' => 'checkout_pending',
         ]);
 

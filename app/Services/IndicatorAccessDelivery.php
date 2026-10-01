@@ -4,8 +4,8 @@ namespace App\Services;
 
 use App\Mail\FreeIndicatorRequestReceived;
 use App\Mail\IndicatorAccessLink;
-use App\Models\IndicatorAccessRequest;
 use App\Models\IndicatorAccessMailSettings;
+use App\Models\IndicatorAccessRequest;
 use App\Models\IndicatorPurchase;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +17,7 @@ class IndicatorAccessDelivery
     {
         $adminEmail = config('services.indicator_access.admin_email');
 
-        if (!$adminEmail) {
+        if (! $adminEmail) {
             Log::warning('Free indicator request received but INDICATOR_ADMIN_EMAIL is not configured.', [
                 'request_id' => $request->id,
                 'email' => $request->email,
@@ -42,7 +42,7 @@ class IndicatorAccessDelivery
         $request->loadMissing('indicator');
         $indicator = $request->indicator;
 
-        if ($request->status !== 'new' || !$indicator || $indicator->is_paid || !$indicator->trading_view_url) {
+        if ($request->status !== 'new' || ! $indicator || $indicator->is_paid || ! $indicator->trading_view_url) {
             throw new RuntimeException('This request is no longer eligible for free access or has no access URL configured.');
         }
 
@@ -56,7 +56,7 @@ class IndicatorAccessDelivery
         $purchase->loadMissing('indicator');
         $indicator = $purchase->indicator;
 
-        if ($purchase->status !== 'paid' || !$indicator || !$indicator->is_paid || !$indicator->trading_view_url) {
+        if ($purchase->status !== 'paid' || ! $indicator || ! $indicator->is_paid || ! $indicator->trading_view_url) {
             throw new RuntimeException('The payment must be verified and the indicator access URL must be configured before delivery.');
         }
 
@@ -80,6 +80,17 @@ class IndicatorAccessDelivery
 
     private function sendAccessMail(string $recipientEmail, string $indicatorName, string $accessUrl, string $deliveryType, ?array $template = null): void
     {
+        app(MailTransportConfiguration::class)->applySavedSettings();
+
+        $mailer = config('mail.default');
+        $configuredMailers = in_array($mailer, ['failover', 'roundrobin'], true)
+            ? config("mail.mailers.{$mailer}.mailers", [])
+            : [$mailer];
+
+        if (array_intersect($configuredMailers, ['log', 'array'])) {
+            throw new RuntimeException('Email delivery is not configured. Set MAIL_MAILER and valid provider settings before approving access.');
+        }
+
         $template ??= $this->template();
         $subject = $template['subject'];
         $body = $template['body'];

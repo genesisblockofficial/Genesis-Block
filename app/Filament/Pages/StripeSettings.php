@@ -78,7 +78,7 @@ class StripeSettings extends Page
                             ->required(),
                     ]),
                 Section::make('Test mode credentials')
-                    ->description('Keys are encrypted in the database. Saved secrets are never shown; leave secret fields empty to keep their current values.')
+                    ->description('The secret key is enough to start checkout testing. Add the webhook signing secret before launch for reliable automatic payment updates. Secrets are encrypted and never shown after saving.')
                     ->columns(2)
                     ->schema([
                         TextInput::make('test_publishable_key')
@@ -93,13 +93,14 @@ class StripeSettings extends Page
                             ->label('Webhook signing secret')
                             ->password()
                             ->placeholder($this->testWebhookConfigured ? 'Saved; enter only to rotate' : 'whsec_...')
+                            ->helperText('Optional for testing checkout. Configure it to receive automatic payment status updates.')
                             ->helperText($this->testWebhookConfigured ? 'A signing secret is already saved.' : 'Not configured.'),
                         Toggle::make('remove_test_credentials')
                             ->label('Remove test secret and webhook credentials')
                             ->columnSpanFull(),
                     ]),
                 Section::make('Live mode credentials')
-                    ->description('Use live keys only after test checkout and webhook verification have passed.')
+                    ->description('Use live keys only after test checkout and webhook verification have passed. The webhook signing secret is recommended before accepting live payments.')
                     ->columns(2)
                     ->schema([
                         TextInput::make('live_publishable_key')
@@ -127,24 +128,16 @@ class StripeSettings extends Page
         $data = $this->form->getState();
         $settings = $this->settingsId
             ? StripeSettingsModel::query()->findOrFail($this->settingsId)
-            : new StripeSettingsModel();
+            : new StripeSettingsModel;
         $environment = $data['active_environment'];
-        $prefix = $environment . '_';
-        $removingActiveCredentials = (bool) ($data['remove_' . $environment . '_credentials'] ?? false);
-        $newSecret = trim((string) ($data[$prefix . 'secret_key'] ?? ''));
-        $newWebhookSecret = trim((string) ($data[$prefix . 'webhook_secret'] ?? ''));
+        $prefix = $environment.'_';
+        $removingActiveCredentials = (bool) ($data['remove_'.$environment.'_credentials'] ?? false);
+        $newSecret = trim((string) ($data[$prefix.'secret_key'] ?? ''));
         $savedSecret = $environment === 'test' ? $settings->test_secret_key : $settings->live_secret_key;
-        $savedWebhookSecret = $environment === 'test' ? $settings->test_webhook_secret : $settings->live_webhook_secret;
 
-        if ($removingActiveCredentials || (!filled($newSecret) && !filled($savedSecret))) {
+        if ($removingActiveCredentials || (! filled($newSecret) && ! filled($savedSecret))) {
             throw ValidationException::withMessages([
                 'data.active_environment' => 'Add a secret key before activating this Stripe environment.',
-            ]);
-        }
-
-        if ($removingActiveCredentials || (!filled($newWebhookSecret) && !filled($savedWebhookSecret))) {
-            throw ValidationException::withMessages([
-                'data.active_environment' => 'Add a webhook signing secret before activating this Stripe environment.',
             ]);
         }
 
@@ -153,10 +146,10 @@ class StripeSettings extends Page
         $settings->live_publishable_key = $data['live_publishable_key'] ?? null;
 
         foreach (['test', 'live'] as $credentialEnvironment) {
-            $removeCredentials = (bool) ($data['remove_' . $credentialEnvironment . '_credentials'] ?? false);
+            $removeCredentials = (bool) ($data['remove_'.$credentialEnvironment.'_credentials'] ?? false);
 
             foreach (['secret_key', 'webhook_secret'] as $credentialName) {
-                $field = $credentialEnvironment . '_' . $credentialName;
+                $field = $credentialEnvironment.'_'.$credentialName;
                 $newValue = trim((string) ($data[$field] ?? ''));
 
                 if ($removeCredentials) {

@@ -12,19 +12,23 @@ class IndicatorAccessLink extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public string $mailSubject;
+
     public function __construct(
         public string $indicatorName,
         public string $accessUrl,
         public string $deliveryType,
-        public string $subject,
+        string $subject,
         public string $body,
         public string $recipientEmail,
-    ) {}
+    ) {
+        $this->mailSubject = $subject;
+    }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subject,
+            subject: $this->mailSubject,
         );
     }
 
