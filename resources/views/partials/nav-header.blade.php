@@ -15,17 +15,17 @@
                             href="{{ route('home') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('about-us') ? 'active' : '' }}"
                             href="{{ route('about-us') }}">About Us</a></li>
-                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('resources') ? 'active' : '' }}"
+                            <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('resources') ? 'active' : '' }}"
                                 href="{{ route('resources') }}">Resources</a></li>
-                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('indicators.*') ? 'active' : '' }}"
+                        <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('indicators.*') ? 'active' : '' }}"
                             href="{{ route('indicators.index') }}">Indicators</a></li>
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
                             href="{{ route('blogs.index') }}">Blogs</a></li>
-                        <li class="nav-item"><a class="nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}"
+                        <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('courses.*') ? 'active' : '' }}"
                             href="{{ route('courses.index') }}">Courses</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}"
+                    <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}"
                             href="{{ route('gallery') }}">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}"
+                    <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}"
                             href="{{ route('news') }}">News</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact-us') ? 'active' : '' }}"
                             href="{{ route('contact-us') }}">Contact Us</a></li>
@@ -38,7 +38,7 @@
                             {{ auth()->user()->initials() }}
                         </a>
                     @else
-                        <a href="{{ route('login') }}" class="get-started-button navbar-register group/button inline-flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 border-2 border-transparent bg-brand-blue text-brand-primary-text hover:bg-brand-hover active:bg-brand-pressed active:border-brand-primary-bg-3 disabled:border-transparent disabled:bg-brand-disabled-bg disabled:text-brand-disabled-text disabled:opacity-100 h-9 gap-1 rounded-lg px-3.5 py-2 body-b3-medium rounded-xl px-4 py-2.5">Get Started</a>
+                        <a href="{{ route('login') }}" class="get-started-button navbar-register group/button inline-flex shrink-0 cursor-pointer items-center justify-center bg-clip-padding font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 border-2 border-transparent bg-brand-blue text-brand-primary-text hover:bg-brand-hover active:bg-brand-pressed active:border-brand-primary-bg-3 disabled:border-transparent disabled:bg-brand-disabled-bg disabled:text-brand-disabled-text disabled:opacity-100 h-9 gap-1 body-b3-medium rounded-xl px-4 py-2.5">Get Started</a>
                     @endauth
                 </div>
             </div>

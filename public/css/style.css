@@ -3600,6 +3600,25 @@ body {
     transform: translateY(-1px);
 }
 
+body.auth-modal-open { overflow: hidden; }
+.auth-gate-modal { align-items: center; display: flex; inset: 0; justify-content: center; opacity: 0; padding: 1rem; pointer-events: none; position: fixed; transition: opacity 180ms ease; visibility: hidden; z-index: 2000; }
+.auth-gate-modal.is-visible { opacity: 1; pointer-events: auto; visibility: visible; }
+.auth-gate-backdrop { background: rgba(10, 18, 12, .72); inset: 0; position: absolute; }
+.auth-gate-panel { background: #fbfdfb; border: 1px solid #cdd8ce; box-shadow: 0 24px 80px rgba(0, 0, 0, .28); color: #14221c; max-width: 440px; padding: 2rem; position: relative; width: 100%; }
+.auth-gate-close { background: transparent; border: 0; color: #718076; cursor: pointer; font-size: 1.7rem; line-height: 1; padding: .2rem; position: absolute; right: 1rem; top: .85rem; }
+.auth-gate-close:hover { color: #14221c; }
+.auth-gate-panel h2 { font-size: 2rem; letter-spacing: -.03em; margin: 0 0 .55rem; }
+.auth-gate-intro { color: #718076; font-size: .86rem; line-height: 1.6; margin: 0 0 1.35rem; max-width: 340px; }
+.auth-gate-form { display: grid; gap: .9rem; }
+.auth-gate-form label { display: block; font-size: .76rem; font-weight: 800; margin-bottom: .35rem; }
+.auth-gate-form input { background: #fff; border: 1px solid #cdd8ce; color: #14221c; font: inherit; min-height: 44px; padding: .6rem .7rem; width: 100%; }
+.auth-gate-form input:focus { border-color: #63af31; outline: 2px solid rgba(99, 175, 49, .15); }
+.auth-gate-form button { background: #70b849; border: 2px solid transparent; border-radius: .75rem; color: #10170d; cursor: pointer; font-size: .85rem; font-weight: 800; margin-top: .3rem; min-height: 44px; padding: .65rem 1rem; }
+.auth-gate-form button:hover { background: #8bca66; }
+.auth-gate-register { color: #718076; font-size: .78rem; margin: 1.2rem 0 0; text-align: center; }
+.auth-gate-register a { color: #4e8f29; font-weight: 800; }
+@media (max-width: 520px) { .auth-gate-panel { padding: 1.5rem; } .auth-gate-panel h2 { font-size: 1.7rem; } }
+
 .home-page {
     --home-ink: #202920;
     --home-muted: #5d685c;
