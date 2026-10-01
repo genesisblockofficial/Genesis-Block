@@ -26,5 +26,6 @@ test('admin panel is only accessible to users with the admin role', function () 
 
     $this->actingAs($admin)
         ->get('/admin')
-        ->assertOk();
+        ->assertOk()
+        ->assertSee('Genesis Block Admin');
 });

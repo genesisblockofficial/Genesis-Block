@@ -17,6 +17,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -29,7 +30,15 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Genesis Block Admin')
-            ->brandLogo(asset('images/logo.png'))
+            ->brandLogo(fn (): HtmlString => new HtmlString(
+                '<span style="display:inline-flex;align-items:center;gap:.65rem;height:2.5rem">'
+                .'<span style="display:inline-flex;width:2.35rem;height:2.35rem;align-items:center;justify-content:center;overflow:hidden;border:1px solid #d1d5db;border-radius:50%;background:#fff">'
+                .'<img src="'.e(asset('images/logo.png')).'" alt="" style="width:155%;height:155%;max-width:none;object-fit:cover;object-position:center 38%;transform:scale(1.08)">'
+                .'</span>'
+                .'<span style="white-space:nowrap;font-size:1rem;font-weight:700">Genesis Block Admin</span>'
+                .'</span>'
+            ))
+            ->brandLogoHeight('2.5rem')
             ->favicon(asset('images/logo.png'))
             ->passwordReset()
             ->colors([
