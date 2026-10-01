@@ -1,498 +1,148 @@
- <!-- Main Content -->
- <section class="section-container">
-     <div class="container">
-         <!-- News Categories -->
-         <div class="news-categories">
-             <button class="category-btn active" data-category="general">All News</button>
-             <button class="category-btn" data-category="crypto">Cryptocurrency</button>
-             <button class="category-btn" data-category="forex">Forex & Metals</button>
-             <button class="category-btn" data-category="stock">Stocks</button>
-             <button class="category-btn" data-category="merger">Mergers & Acquisitions</button>
-             <button class="category-btn" data-category="ipo">IPOs</button>
-         </div>
+<main class="calendar-page">
+    <div class="calendar-wrap">
+        <span class="calendar-kicker">Genesis Block / Economic Calendar</span>
+        <div class="calendar-heading">
+            <div>
+                <h1>Market calendar</h1>
+                <p>Track the economic releases and central-bank events that can move currency markets.</p>
+            </div>
+            <div class="calendar-live"><span id="calendarClock">Loading market time...</span></div>
+        </div>
 
-         <!-- Loading Spinner -->
-         <div class="loading-spinner" id="loadingSpinner"></div>
+        <div class="calendar-toolbar" aria-label="Calendar controls">
+            <div class="calendar-toolbar-group">
+                <button class="calendar-button" id="previousWeek" type="button" aria-label="Previous week">&#8592;</button>
+                <button class="calendar-button active" id="todayButton" type="button">Today</button>
+                <button class="calendar-button" id="nextWeek" type="button" aria-label="Next week">&#8594;</button>
+                <div class="calendar-switcher" role="group" aria-label="Calendar range">
+                    <button class="active" data-range="week" type="button">Week</button>
+                    <button data-range="day" type="button">Day</button>
+                </div>
+            </div>
+            <div class="calendar-toolbar-group">
+                <select class="calendar-select" id="impactFilter" aria-label="Filter by impact">
+                    <option value="all">All impact levels</option>
+                    <option value="high">High impact</option>
+                    <option value="medium">Medium impact</option>
+                    <option value="low">Low impact</option>
+                </select>
+                <select class="calendar-select" id="currencyFilter" aria-label="Filter by currency">
+                    <option value="all">All currencies</option>
+                    <option value="USD">USD</option><option value="EUR">EUR</option><option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option><option value="AUD">AUD</option><option value="CAD">CAD</option>
+                </select>
+                <select class="calendar-select" id="timezoneSelect" aria-label="Calendar timezone">
+                    <option value="local">Local time</option>
+                    <option value="UTC">UTC</option>
+                </select>
+            </div>
+        </div>
 
-         <!-- Featured News -->
-         <div class="featured-news" id="featuredNews">
-             <div class="featured-main" id="featuredArticle">
-                 <div class="featured-image" id="featuredImage"></div>
-                 <div class="featured-content">
-                     <span class="featured-badge">LATEST NEWS</span>
-                     <h2 class="featured-title" id="featuredTitle">Loading latest market news...</h2>
-                     <p class="featured-excerpt" id="featuredExcerpt">Fetching real-time market updates from global
-                         financial sources.</p>
-                     <div class="news-meta">
-                         <div class="news-date">
-                             <i class="far fa-calendar"></i>
-                             <span id="featuredDate">Just now</span>
-                         </div>
-                         <div class="news-read-time">
-                             <i class="far fa-clock"></i>
-                             <span id="featuredSource">Loading source...</span>
-                         </div>
-                     </div>
-                 </div>
-             </div>
+        <div class="calendar-table" aria-live="polite">
+            <div class="calendar-table-head"><span>Time</span><span>Cur.</span><span>Event</span><span>Impact</span><span>Previous</span><span>Forecast</span></div>
+            <div id="calendarRows"></div>
+        </div>
+        <div class="calendar-legend">
+            <span><i class="impact-dot high"></i> High impact</span>
+            <span><i class="impact-dot medium"></i> Medium impact</span>
+            <span><i class="impact-dot low"></i> Low impact</span>
+            <span>All times shown in <strong id="timezoneLabel">your local timezone</strong></span>
+        </div>
+        <div class="calendar-note"><strong>Trading note:</strong> Economic releases are indicative and can be revised. Always confirm the actual result and manage risk around volatile announcements.</div>
+    </div>
+</main>
 
-             <div class="featured-sidebar" id="trendingNews">
-                 <div class="trending-item">
-                     <div class="trending-rank">1</div>
-                     <h3 class="trending-title">Loading...</h3>
-                     <div class="trending-meta">Fetching trending topics</div>
-                 </div>
-                 <div class="trending-item">
-                     <div class="trending-rank">2</div>
-                     <h3 class="trending-title">Loading...</h3>
-                     <div class="trending-meta">Fetching trending topics</div>
-                 </div>
-                 <div class="trending-item">
-                     <div class="trending-rank">3</div>
-                     <h3 class="trending-title">Loading...</h3>
-                     <div class="trending-meta">Fetching trending topics</div>
-                 </div>
-                 <div class="trending-item">
-                     <div class="trending-rank">4</div>
-                     <h3 class="trending-title">Loading...</h3>
-                     <div class="trending-meta">Fetching trending topics</div>
-                 </div>
-             </div>
-         </div>
+<script>
+    (() => {
+        const sampleEvents = [
+            { day: 0, time: '08:30', currency: 'USD', title: 'Initial Jobless Claims', note: 'Weekly labor-market data', impact: 'medium', previous: '228K', forecast: '230K' },
+            { day: 0, time: '10:00', currency: 'USD', title: 'Existing Home Sales', note: 'Housing market activity', impact: 'low', previous: '4.00M', forecast: '4.10M' },
+            { day: 0, time: '14:00', currency: 'USD', title: 'FOMC Member Speech', note: 'Federal Reserve commentary', impact: 'medium', previous: '-', forecast: '-' },
+            { day: 1, time: '02:00', currency: 'GBP', title: 'Retail Sales m/m', note: 'Monthly consumer spending', impact: 'high', previous: '0.3%', forecast: '0.4%' },
+            { day: 1, time: '04:30', currency: 'EUR', title: 'ECB Monetary Policy Meeting', note: 'Central bank decision', impact: 'high', previous: '2.15%', forecast: '2.15%' },
+            { day: 1, time: '08:30', currency: 'USD', title: 'Building Permits', note: 'Preliminary construction permits', impact: 'medium', previous: '1.45M', forecast: '1.44M' },
+            { day: 2, time: '03:30', currency: 'AUD', title: 'Employment Change', note: 'Monthly employment report', impact: 'high', previous: '25.2K', forecast: '18.0K' },
+            { day: 2, time: '08:30', currency: 'CAD', title: 'CPI m/m', note: 'Consumer price inflation', impact: 'high', previous: '0.1%', forecast: '0.2%' },
+            { day: 2, time: '10:00', currency: 'USD', title: 'New Home Sales', note: 'New residential sales', impact: 'medium', previous: '694K', forecast: '700K' },
+            { day: 3, time: '00:30', currency: 'JPY', title: 'National Core CPI y/y', note: 'Core inflation excluding fresh food', impact: 'high', previous: '3.7%', forecast: '3.6%' },
+            { day: 3, time: '08:30', currency: 'USD', title: 'Core Durable Goods Orders', note: 'Business investment demand', impact: 'medium', previous: '0.2%', forecast: '0.3%' },
+            { day: 3, time: '10:00', currency: 'USD', title: 'Michigan Consumer Sentiment', note: 'Preliminary consumer confidence', impact: 'medium', previous: '60.7', forecast: '61.2' },
+            { day: 4, time: '04:00', currency: 'EUR', title: 'German Flash Manufacturing PMI', note: 'Business activity survey', impact: 'medium', previous: '49.0', forecast: '49.5' },
+            { day: 4, time: '08:30', currency: 'USD', title: 'GDP Price Index', note: 'Quarterly inflation measure', impact: 'high', previous: '3.4%', forecast: '3.4%' },
+            { day: 4, time: '09:45', currency: 'USD', title: 'Chicago PMI', note: 'Regional manufacturing activity', impact: 'low', previous: '40.5', forecast: '42.0' }
+        ];
+        let events = [];
+        const state = { offset: 0, range: 'week', impact: 'all', currency: 'all', timezone: 'local' };
+        const rows = document.getElementById('calendarRows');
+        const calendarNote = document.querySelector('.calendar-note');
+        const dayName = new Intl.DateTimeFormat('en-US', { weekday: 'long' });
+        const dateLabel = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
 
-         <!-- News Grid -->
-         <div class="news-grid" id="newsGrid">
-             <div class="loading-card">
-                 <div class="loading-spinner" style="display: block;"></div>
-                 <p class="mt-3">Fetching real-time market news...</p>
-             </div>
-         </div>
+        function monday(date) {
+            const copy = new Date(date); copy.setHours(0, 0, 0, 0);
+            const day = copy.getDay(); copy.setDate(copy.getDate() - (day === 0 ? 6 : day - 1)); return copy;
+        }
+        function render() {
+            const start = monday(new Date()); start.setDate(start.getDate() + state.offset * 7);
+            const days = state.range === 'day' ? [new Date(start)] : Array.from({ length: 5 }, (_, index) => { const day = new Date(start); day.setDate(day.getDate() + index); return day; });
+            rows.innerHTML = '';
+            days.forEach((day, index) => {
+                const dayEvents = events.filter(event => {
+                    const eventDate = new Date(`${event.date}T00:00:00`);
+                    const dayIndex = Math.round((eventDate - start) / 86400000);
 
-         <!-- Market Updates -->
-         <div class="market-updates">
-             <div class="container">
-                 <h2 class="section-title">Live Market Updates</h2>
-                 <div class="row" id="marketUpdates">
-                     <div class="col-md-6">
-                         <div class="update-card">
-                             <div class="update-title">Loading market updates...</div>
-                             <div class="update-time">Just now</div>
-                             <div class="update-content">Fetching real-time market information</div>
-                         </div>
-                     </div>
-                     <div class="col-md-6">
-                         <div class="update-card">
-                             <div class="update-title">Loading market updates...</div>
-                             <div class="update-time">Just now</div>
-                             <div class="update-content">Fetching real-time market information</div>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
+                    return (state.range === 'day' ? dayIndex === 0 : dayIndex === index) &&
+                        (state.impact === 'all' || event.impact === state.impact) &&
+                        (state.currency === 'all' || event.currency === state.currency);
+                });
+                const section = document.createElement('section'); section.className = 'calendar-day';
+                section.innerHTML = `<div class="calendar-day-title"><strong>${dayName.format(day)} <span>${dateLabel.format(day)}</span></strong><span>${dayEvents.length} event${dayEvents.length === 1 ? '' : 's'}</span></div>`;
+                dayEvents.forEach(event => {
+                    const item = document.createElement('div'); item.className = 'calendar-event';
+                    const dots = ['low', 'medium', 'high'].map(level => `<i class="impact-dot ${level === event.impact ? event.impact : ''}"></i>`).join('');
+                    item.innerHTML = `<span class="calendar-time">${event.time}</span><span class="calendar-currency">${event.currency}</span><span class="calendar-event-name">${event.title}<small class="calendar-event-note">${event.note}</small></span><span class="calendar-impact" aria-label="${event.impact} impact">${dots}</span><span class="calendar-number ${event.previous === '-' ? 'muted' : ''}">${event.previous}</span><span class="calendar-number ${event.forecast === '-' ? 'muted' : ''}">${event.forecast}</span>`;
+                    section.appendChild(item);
+                });
+                if (!dayEvents.length) section.insertAdjacentHTML('beforeend', '<div class="calendar-event"><span class="calendar-badge">No matching events for this filter.</span></div>');
+                rows.appendChild(section);
+            });
+        }
+        function updateClock() {
+            const now = new Date(); const zone = state.timezone === 'UTC' ? 'UTC' : 'local';
+            document.getElementById('calendarClock').textContent = `${now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: zone === 'UTC' ? 'UTC' : undefined })} ${zone}`;
+        }
+        async function loadEvents() {
+            const start = monday(new Date());
+            start.setDate(start.getDate() + state.offset * 7);
+            const end = new Date(start);
+            end.setDate(end.getDate() + 4);
+            const query = new URLSearchParams({
+                from: start.toISOString().slice(0, 10),
+                to: end.toISOString().slice(0, 10),
+            });
 
-         <!-- Newsletter Section -->
-         <div class="newsletter-section">
-             <h2 class="newsletter-title">Stay Ahead of the Market</h2>
-             <p class="newsletter-subtitle">Get daily market insights, breaking news, and expert analysis delivered
-                 directly to your inbox.</p>
-             <form class="newsletter-form" id="newsletterForm">
-                 <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
-                 <button type="submit" class="btn btn-primary">Subscribe Now</button>
-             </form>
-         </div>
-     </div>
- </section>
- @push('script')
-     <script>
-         // Configuration
-         const CONFIG = {
-             // Finnhub API Key - Replace with your own key
-             FINNHUB_API_KEY: 'd5dakfhr01qur4ir155gd5dakfhr01qur4ir1560',
+            try {
+                const response = await fetch(`/api/news/economic-calendar?${query}`);
+                const payload = await response.json();
 
-             // News categories mapping
-             CATEGORIES: {
-                 'general': 'General',
-                 'crypto': 'Cryptocurrency',
-                 'forex': 'Forex & Metals',
-                 'stock': 'Stocks',
-                 'merger': 'Mergers',
-                 'ipo': 'IPOs',
-                 'financial': 'Financial',
-                 'technology': 'Technology'
-             },
+                if (!response.ok) throw new Error(payload.message || 'Unable to load economic events.');
 
-             // API Endpoints
-             FINNHUB_NEWS_URL: 'https://finnhub.io/api/v1/news',
-             FINNHUB_CRYPTO_NEWS_URL: 'https://finnhub.io/api/v1/news',
+                events = payload.data || [];
+                calendarNote.innerHTML = '<strong>Live data:</strong> Events are supplied by Finnhub and may be revised after publication.';
+            } catch (error) {
+                events = [];
+                calendarNote.innerHTML = `<strong>Live data unavailable:</strong> ${error.message} Add a valid <code>FINNHUB_API_KEY</code> to the server environment.`;
+            }
 
-             // Update intervals (in milliseconds)
-             UPDATE_INTERVAL: 60000, // 1 minute
-             TICKER_INTERVAL: 5000 // 5 seconds
-         };
-
-         // News Manager Class
-         class NewsManager {
-             constructor() {
-                 this.currentCategory = 'general';
-                 this.articles = [];
-                 this.trendingArticles = [];
-                 this.lastUpdate = null;
-                 this.isLoading = false;
-             }
-
-             // Initialize news manager
-             async init() {
-                 this.setupEventListeners();
-                 await this.loadNews();
-                 this.startAutoRefresh();
-             }
-
-             // Setup event listeners
-             setupEventListeners() {
-                 // Category filter buttons
-                 document.querySelectorAll('.category-btn').forEach(button => {
-                     button.addEventListener('click', async () => {
-                         const category = button.dataset.category;
-                         await this.filterNews(category);
-
-                         // Update active button
-                         document.querySelectorAll('.category-btn').forEach(btn => {
-                             btn.classList.remove('active');
-                         });
-                         button.classList.add('active');
-                     });
-                 });
-
-                 // Newsletter subscription
-                 document.getElementById('newsletterForm').addEventListener('submit', (e) => {
-                     e.preventDefault();
-                     const email = e.target.querySelector('.newsletter-input').value;
-                     if (email) {
-                         alert(`Thank you for subscribing! Market insights will be sent to ${email}`);
-                         e.target.reset();
-                     }
-                 });
-
-                 // Featured article click
-                 document.getElementById('featuredArticle').addEventListener('click', () => {
-                     if (this.articles.length > 0) {
-                         this.openArticle(this.articles[0]);
-                     }
-                 });
-             }
-
-             // Load news from API
-             async loadNews(category = 'general') {
-                 this.currentCategory = category;
-                 this.showLoading(true);
-
-                 try {
-                     let url;
-                     let params = {};
-
-                     // Build API URL based on category
-                     if (category === 'crypto') {
-                         url = CONFIG.FINNHUB_CRYPTO_NEWS_URL;
-                         params = {
-                             category: 'crypto',
-                             token: CONFIG.FINNHUB_API_KEY
-                         };
-                     } else {
-                         url = CONFIG.FINNHUB_NEWS_URL;
-                         params = {
-                             category: category,
-                             token: CONFIG.FINNHUB_API_KEY
-                         };
-                     }
-
-                     // Fetch news
-                     const response = await fetch(`${url}?${new URLSearchParams(params)}`);
-
-                     if (!response.ok) {
-                         throw new Error(`HTTP error! status: ${response.status}`);
-                     }
-
-                     const data = await response.json();
-
-                     // Process and store articles
-                     this.articles = this.processArticles(data);
-                     this.lastUpdate = new Date();
-
-                     // Update UI
-                     this.updateFeaturedArticle();
-                     this.updateNewsGrid();
-                     this.updateTrendingNews();
-                     this.updateMarketUpdates();
-
-                 } catch (error) {
-                     console.error('Error fetching news:', error);
-                     this.showError('Failed to load news. Using sample data...');
-                     this.loadSampleData();
-                 } finally {
-                     this.showLoading(false);
-                 }
-             }
-
-             // Process raw articles from API
-             processArticles(articles) {
-                 return articles.slice(0, 15).map(article => ({
-                     id: article.id || Math.random().toString(36).substr(2, 9),
-                     title: article.headline || article.title || 'Market Update',
-                     excerpt: article.summary || 'No summary available',
-                     category: article.category || 'general',
-                     source: article.source || 'Finnhub',
-                     date: new Date(article.datetime * 1000 || article.publishedAt || Date.now()),
-                     url: article.url || '#',
-                     image: article.image || this.getRandomNewsImage(),
-                     sentiment: article.sentiment || 'neutral'
-                 }));
-             }
-
-             // Get random news image
-             getRandomNewsImage() {
-                 const images = [
-                     'https://images.unsplash.com/photo-1621761191319-c6fb62004040?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                     'https://images.unsplash.com/photo-1620336655055-bd87c5d1d73f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                     'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                     'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                     'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-                 ];
-                 return images[Math.floor(Math.random() * images.length)];
-             }
-
-             // Update featured article
-             updateFeaturedArticle() {
-                 if (this.articles.length === 0) return;
-
-                 const featured = this.articles[0];
-                 const featuredElement = document.getElementById('featuredArticle');
-
-                 featuredElement.querySelector('#featuredImage').style.backgroundImage = `url('${featured.image}')`;
-                 featuredElement.querySelector('#featuredTitle').textContent = featured.title;
-                 featuredElement.querySelector('#featuredExcerpt').textContent = featured.excerpt.length > 200 ?
-                     featured.excerpt.substring(0, 200) + '...' :
-                     featured.excerpt;
-                 featuredElement.querySelector('#featuredDate').textContent = this.formatDate(featured.date);
-                 featuredElement.querySelector('#featuredSource').textContent = featured.source;
-             }
-
-             // Update news grid
-             updateNewsGrid() {
-                 const newsGrid = document.getElementById('newsGrid');
-                 newsGrid.innerHTML = '';
-
-                 // Show articles 1-12 (excluding featured which is article 0)
-                 const gridArticles = this.articles.slice(1, 13);
-
-                 gridArticles.forEach((article, index) => {
-                     const newsCard = document.createElement('div');
-                     newsCard.className = 'news-card';
-
-                     newsCard.innerHTML = `
-                        <div class="news-image" style="background-image: url('${article.image}')"></div>
-                        <div class="news-content">
-                            <span class="news-category">${CONFIG.CATEGORIES[article.category] || 'Market News'}</span>
-                            <h4 class="news-title">${article.title}</h4>
-                            <p class="news-excerpt">${article.excerpt.length > 150
-                    ? article.excerpt.substring(0, 150) + '...'
-                    : article.excerpt}</p>
-                            <div class="news-meta">
-                                <div class="news-date">
-                                    <i class="far fa-calendar"></i>
-                                    <span>${this.formatDate(article.date)}</span>
-                                </div>
-                                <div class="news-read-time">
-                                    <i class="fas fa-newspaper"></i>
-                                    <span>${article.source}</span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-
-                     newsCard.addEventListener('click', () => this.openArticle(article));
-                     newsGrid.appendChild(newsCard);
-                 });
-             }
-
-             // Update trending news sidebar
-             updateTrendingNews() {
-                 const trendingContainer = document.getElementById('trendingNews');
-                 const trendingItems = trendingContainer.querySelectorAll('.trending-item');
-
-                 // Get top 4 trending articles (excluding featured)
-                 const trendingArticles = this.articles.slice(1, 5);
-
-                 trendingItems.forEach((item, index) => {
-                     if (trendingArticles[index]) {
-                         const article = trendingArticles[index];
-                         item.querySelector('.trending-title').textContent = article.title.length > 50 ?
-                             article.title.substring(0, 50) + '...' :
-                             article.title;
-                         item.querySelector('.trending-meta').textContent = `${article.source} • Trending`;
-
-                         item.addEventListener('click', () => this.openArticle(article));
-                     }
-                 });
-             }
-
-             // Update market updates section
-             updateMarketUpdates() {
-                 const updatesContainer = document.getElementById('marketUpdates');
-                 const updateCards = updatesContainer.querySelectorAll('.update-card');
-
-                 // Get 4 articles for updates
-                 const updateArticles = this.articles.slice(0, 4);
-
-                 updateCards.forEach((card, index) => {
-                     if (updateArticles[index]) {
-                         const article = updateArticles[index];
-                         card.querySelector('.update-title').textContent = article.title.length > 60 ?
-                             article.title.substring(0, 60) + '...' :
-                             article.title;
-                         card.querySelector('.update-time').textContent = this.getRelativeTime(article.date);
-                         card.querySelector('.update-content').textContent = article.excerpt.length > 100 ?
-                             article.excerpt.substring(0, 100) + '...' :
-                             article.excerpt;
-
-                         // Set border color based on sentiment
-                         if (article.sentiment === 'positive') {
-                             card.style.borderLeftColor = 'var(--green)';
-                         } else if (article.sentiment === 'negative') {
-                             card.style.borderLeftColor = 'var(--red)';
-                             card.classList.add('negative');
-                         }
-                     }
-                 });
-             }
-
-             // Filter news by category
-             async filterNews(category) {
-                 await this.loadNews(category);
-             }
-
-             // Open article in new tab
-             openArticle(article) {
-                 if (article.url && article.url !== '#') {
-                     window.open(article.url, '_blank');
-                 } else {
-                     // Show modal or detailed view
-                     alert(
-                         `${article.title}\n\n${article.excerpt}\n\nSource: ${article.source}\nPublished: ${this.formatDate(article.date)}`
-                         );
-                 }
-             }
-
-             // Start auto-refresh
-             startAutoRefresh() {
-                 setInterval(() => {
-                     this.loadNews(this.currentCategory);
-                 }, CONFIG.UPDATE_INTERVAL);
-             }
-
-             // Show/hide loading spinner
-             showLoading(show) {
-                 document.getElementById('loadingSpinner').style.display = show ? 'block' : 'none';
-                 this.isLoading = show;
-             }
-
-             // Show error message
-             showError(message) {
-                 const newsGrid = document.getElementById('newsGrid');
-                 newsGrid.innerHTML = `
-                    <div class="loading-card">
-                        <i class="fas fa-exclamation-triangle fa-2x mb-3" style="color: var(--red);"></i>
-                        <p>${message}</p>
-                    </div>
-                `;
-             }
-
-             // Load sample data (fallback)
-             loadSampleData() {
-                 const sampleArticles = [{
-                         id: 1,
-                         title: "Bitcoin ETF Approval Leads to Market Surge",
-                         excerpt: "Major financial institutions receive SEC approval for Bitcoin ETFs, causing a 15% surge in BTC prices.",
-                         category: "crypto",
-                         source: "MarketWatch",
-                         date: new Date(),
-                         url: "#",
-                         image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         sentiment: "positive"
-                     },
-                     {
-                         id: 2,
-                         title: "Federal Reserve Holds Interest Rates Steady",
-                         excerpt: "The Fed maintains current rates while signaling potential cuts later this year amid cooling inflation.",
-                         category: "general",
-                         source: "Reuters",
-                         date: new Date(Date.now() - 3600000),
-                         url: "#",
-                         image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                         sentiment: "neutral"
-                     }
-                 ];
-
-                 this.articles = sampleArticles;
-                 this.updateFeaturedArticle();
-                 this.updateNewsGrid();
-                 this.updateTrendingNews();
-                 this.updateMarketUpdates();
-             }
-
-             // Format date
-             formatDate(date) {
-                 return date.toLocaleDateString('en-US', {
-                     month: 'short',
-                     day: 'numeric',
-                     year: 'numeric'
-                 });
-             }
-
-             // Get relative time
-             getRelativeTime(date) {
-                 const now = new Date();
-                 const diffMs = now - date;
-                 const diffMins = Math.floor(diffMs / 60000);
-                 const diffHours = Math.floor(diffMs / 3600000);
-                 const diffDays = Math.floor(diffMs / 86400000);
-
-                 if (diffMins < 1) return 'Just now';
-                 if (diffMins < 60) return `${diffMins} minute${diffMins === 1 ? '' : 's'} ago`;
-                 if (diffHours < 24) return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
-                 if (diffDays < 7) return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
-                 return this.formatDate(date);
-             }
-         }
-
-         // Initialize when DOM is loaded
-         document.addEventListener('DOMContentLoaded', async function() {
-             // Initialize news manager
-             const newsManager = new NewsManager();
-             await newsManager.init();
-
-             // Update time indicator
-             function updateTimeIndicator() {
-                 const timeElement = document.querySelector('.news-hero-subtitle');
-                 const now = new Date();
-                 const timeString = now.toLocaleTimeString('en-US', {
-                     hour: '2-digit',
-                     minute: '2-digit',
-                     hour12: true
-                 });
-
-                 if (timeElement) {
-                     const baseText =
-                         'Real-time financial news from global markets, cryptocurrencies, forex, and stocks. Powered by Finnhub API.';
-                     timeElement.textContent = `${baseText} Last updated: ${timeString}`;
-                 }
-             }
-
-             // Initial time update
-             updateTimeIndicator();
-
-             // Update time every minute
-             setInterval(updateTimeIndicator, 60000);
-         });
-     </script>
- @endpush
+            render();
+        }
+        document.getElementById('previousWeek').addEventListener('click', () => { state.offset--; loadEvents(); });
+        document.getElementById('nextWeek').addEventListener('click', () => { state.offset++; loadEvents(); });
+        document.getElementById('todayButton').addEventListener('click', () => { state.offset = 0; loadEvents(); });
+        document.querySelectorAll('[data-range]').forEach(button => button.addEventListener('click', () => { document.querySelectorAll('[data-range]').forEach(item => item.classList.remove('active')); button.classList.add('active'); state.range = button.dataset.range; render(); }));
+        document.getElementById('impactFilter').addEventListener('change', event => { state.impact = event.target.value; render(); });
+        document.getElementById('currencyFilter').addEventListener('change', event => { state.currency = event.target.value; render(); });
+        document.getElementById('timezoneSelect').addEventListener('change', event => { state.timezone = event.target.value; document.getElementById('timezoneLabel').textContent = event.target.value === 'UTC' ? 'UTC' : 'your local timezone'; updateClock(); });
+        loadEvents(); updateClock(); setInterval(updateClock, 30000);
+    })();
+</script>

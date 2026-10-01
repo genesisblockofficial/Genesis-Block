@@ -9,6 +9,7 @@ use App\Livewire\Gallery;
 use App\Livewire\Home;
 use App\Http\Controllers\IndicatorAccessRequestController;
 use App\Http\Controllers\IndicatorCheckoutController;
+use App\Http\Controllers\EconomicCalendarController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Livewire\IndicatorCatalog;
 use App\Livewire\Login;
@@ -44,3 +45,6 @@ Route::get('indicators/purchases/{purchase}/result', [IndicatorCheckoutControlle
 	->name('indicators.payment-result');
 Route::post('stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
 Route::get('news', News::class)->name('news');
+Route::get('api/news/economic-calendar', EconomicCalendarController::class)
+	->middleware('throttle:30,1')
+	->name('api.news.economic-calendar');

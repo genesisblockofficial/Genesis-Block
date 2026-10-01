@@ -29,6 +29,10 @@ return [
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
     ],
 
+    'finnhub' => [
+        'key' => env('FINNHUB_API_KEY'),
+    ],
+
     'indicator_access' => [
         'admin_email' => env('INDICATOR_ADMIN_EMAIL'),
     ],

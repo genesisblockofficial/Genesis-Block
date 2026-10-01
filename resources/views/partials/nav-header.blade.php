@@ -28,7 +28,7 @@
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('news') ? 'active' : '' }}"
                             href="{{ route('news') }}">News</a></li>
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact-us') ? 'active' : '' }}"
-                            href="{{ route('contact-us') }}">Contact</a></li>
+                            href="{{ route('contact-us') }}">Contact Us</a></li>
                 </ul>
                 <div class="navbar-actions">
                     <a href="{{ route('login') }}" class="navbar-login">Login</a>
