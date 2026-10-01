@@ -21,7 +21,12 @@ class CustomerResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Identification;
 
-    protected static ?string $recordTitleAttribute = 'Customer';
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['name', 'email'];
+    }
 
     public static function getNavigationBadge(): ?string
     {

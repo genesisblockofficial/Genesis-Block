@@ -24,7 +24,7 @@ class GalleryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::Folder;
 
-    protected static ?string $recordTitleAttribute = 'Folder';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static string|UnitEnum|null $navigationGroup = 'Website CRM';
 

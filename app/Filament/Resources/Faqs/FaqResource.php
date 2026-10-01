@@ -22,7 +22,12 @@ class FaqResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BookOpen;
 
-    protected static ?string $recordTitleAttribute = 'Faq';
+    protected static ?string $recordTitleAttribute = 'question';
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['question', 'answer'];
+    }
 
     protected static string|UnitEnum|null $navigationGroup = 'Website CRM';
 

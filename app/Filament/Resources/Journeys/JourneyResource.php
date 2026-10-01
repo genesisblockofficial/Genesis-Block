@@ -21,7 +21,7 @@ class JourneyResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowPath;
 
-    protected static ?string $recordTitleAttribute = 'Journey';
+    protected static ?string $recordTitleAttribute = 'title';
 
     protected static string|UnitEnum|null $navigationGroup = 'Website CRM';
 

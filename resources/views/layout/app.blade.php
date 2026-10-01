@@ -14,6 +14,11 @@
 
 <body>
 
+    <div class="page-loader" data-page-loader aria-hidden="true">
+        <div class="page-loader-mark"><img src="{{ asset('images/logo.png') }}" alt="Genesis Block"></div>
+        <span class="page-loader-line"></span>
+    </div>
+
     @include('partials.nav-header')
 
     {{ $slot }}
