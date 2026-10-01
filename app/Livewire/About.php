@@ -28,6 +28,10 @@ class About extends Component
             'aboutUs' => $aboutUs,
             'journeys' => $journeys,
             'teamMembers' => $teamMembers,
-        ])->layout('layout.app');
+        ])->layout('layout.app', [
+            'seoTitle' => 'About Genesis Block | Market Education',
+            'seoDescription' => 'Meet the Genesis Block team and learn about our approach to market education, trading tools and independent research.',
+            'seoCanonical' => route('about-us'),
+        ]);
     }
 }

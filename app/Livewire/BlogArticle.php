@@ -37,6 +37,27 @@ class BlogArticle extends Component
                 'html_input' => 'strip',
                 'allow_unsafe_links' => false,
             ]),
-        ])->layout('layout.app');
+        ])->layout('layout.app', [
+            'seoTitle' => $post->title.' | Genesis Block',
+            'seoDescription' => Str::limit(strip_tags($post->excerpt ?: $post->content), 160),
+            'seoCanonical' => route('blogs.show', ['slug' => $post->slug]),
+            'seoImage' => $post->cover_image ? asset('storage/'.ltrim($post->cover_image, '/')) : null,
+            'seoType' => 'article',
+            'seoNoIndex' => false,
+            'seoStructuredData' => [[
+                '@type' => 'Article',
+                'headline' => $post->title,
+                'description' => Str::limit(strip_tags($post->excerpt ?: $post->content), 300),
+                'datePublished' => $post->published_at->toIso8601String(),
+                'dateModified' => $post->updated_at->toIso8601String(),
+                'author' => [
+                    '@type' => 'Organization',
+                    'name' => $post->author ?: config('app.name', 'Genesis Block'),
+                ],
+                'publisher' => ['@id' => route('home').'#organization'],
+                'mainEntityOfPage' => route('blogs.show', ['slug' => $post->slug]),
+                ...($post->cover_image ? ['image' => asset('storage/'.ltrim($post->cover_image, '/'))] : []),
+            ]],
+        ]);
     }
 }

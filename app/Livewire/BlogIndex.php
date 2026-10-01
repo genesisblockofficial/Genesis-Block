@@ -41,7 +41,7 @@ class BlogIndex extends Component
             ->published()
             ->when($this->category !== '', fn ($query) => $query->where('category', $this->category))
             ->when($this->search !== '', function ($query): void {
-                $search = '%' . addcslashes($this->search, '%_\\') . '%';
+                $search = '%'.addcslashes($this->search, '%_\\').'%';
 
                 $query->where(function ($query) use ($search): void {
                     $query->where('title', 'like', $search)
@@ -55,6 +55,10 @@ class BlogIndex extends Component
         return view('livewire.blog-index', [
             'posts' => $posts,
             'categories' => $categories,
-        ])->layout('layout.app');
+        ])->layout('layout.app', [
+            'seoTitle' => 'Market Education Articles & Trading Insights | Genesis Block',
+            'seoDescription' => 'Read Genesis Block articles on market education, trading tools, indicators and research.',
+            'seoCanonical' => route('blogs.index'),
+        ]);
     }
 }

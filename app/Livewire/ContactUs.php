@@ -52,6 +52,10 @@ class ContactUs extends Component
         return view('livewire.contact-us', [
             'departments' => $departments,
             'companyDetails' => $companyDetails,
-        ])->layout('layout.app');
+        ])->layout('layout.app', [
+            'seoTitle' => 'Contact Genesis Block | Support & Partnerships',
+            'seoDescription' => 'Contact Genesis Block for customer support, education, indicator access and partnership enquiries.',
+            'seoCanonical' => route('contact-us'),
+        ]);
     }
 }

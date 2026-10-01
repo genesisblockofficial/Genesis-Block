@@ -4,6 +4,7 @@ use App\Http\Controllers\EconomicCalendarController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\IndicatorAccessRequestController;
 use App\Http\Controllers\IndicatorCheckoutController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Livewire\About;
 use App\Livewire\BlogArticle;
@@ -25,6 +26,20 @@ use App\Livewire\TeamMembers;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/robots.txt', function () {
+    return response(implode("\n", [
+        'User-agent: *',
+        'Allow: /',
+        'Disallow: /admin',
+        'Disallow: /account',
+        'Disallow: /profile',
+        'Disallow: /journal',
+        'Disallow: /auth/google',
+        'Sitemap: '.route('sitemap'),
+        '',
+    ]), 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
+})->name('robots');
 Route::get('about-us', About::class)->name('about-us');
 Route::get('courses', Courses::class)->middleware('auth')->name('courses.index');
 Route::get('journal', Journal::class)->middleware('auth')->name('journal');
