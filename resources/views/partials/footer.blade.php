@@ -20,7 +20,7 @@
             </ul>
         </div>
         <div class="site-footer-links">
-            <div><h2>Explore</h2><a href="{{ route('about-us') }}">About us</a><a data-auth-gate href="{{ route('courses.index') }}">Courses</a><a data-auth-gate href="{{ route('journal') }}">My Journal</a><a data-auth-gate href="{{ route('gallery') }}">Gallery</a></div>
+            <div><h2>Explore</h2><a href="{{ route('about-us') }}">About us</a><a data-auth-gate href="{{ route('courses.index') }}">Courses</a><a data-auth-gate href="{{ route('journal') }}">My Journal</a><a data-auth-gate href="{{ route('gallery') }}">Gallery</a><a data-auth-gate href="{{ route('team-members') }}">Team Members</a><a data-auth-gate href="{{ route('journey') }}">Journey</a></div>
             <div><h2>Learn</h2><a data-auth-gate href="{{ route('resources') }}">Resources</a><a data-auth-gate href="{{ route('indicators.index') }}">Indicators</a><a data-auth-gate href="{{ route('faqs') }}">FAQs</a><a href="{{ route('blogs.index') }}">Blogs</a><a data-auth-gate href="{{ route('news') }}">News</a></div>
             <div><h2>Connect</h2><a href="{{ route('contact-us') }}">Contact us</a><a href="{{ route('login') }}">Login</a></div>
         </div>

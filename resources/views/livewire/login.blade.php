@@ -16,6 +16,12 @@
                 <p>Enter your account details to continue.</p>
             </div>
 
+            <a class="auth-google-button" href="{{ route('auth.google.redirect') }}">
+                <i class="fab fa-google" aria-hidden="true"></i>
+                <span>Continue with Google</span>
+            </a>
+            <div class="auth-divider" aria-hidden="true"><span>or sign in with email</span></div>
+
             @if (session('status'))
                 <div class="auth-status" role="status">{{ session('status') }}</div>
             @endif
@@ -29,7 +35,7 @@
 
                 <div class="auth-field">
                     <label for="email">Email address</label>
-                    <input id="email" name="email" type="email" value="{{ old('email') }}"
+                    <input id="email" name="email" type="email" value="{{ old('email', request()->query('email')) }}"
                         autocomplete="username" inputmode="email" placeholder="you@example.com" required autofocus>
                 </div>
 

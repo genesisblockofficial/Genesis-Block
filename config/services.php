@@ -22,6 +22,10 @@ return [
         'key' => env('RESEND_API_KEY'),
     ],
 
+    'google' => [
+        'redirect' => env('GOOGLE_REDIRECT_URI', env('APP_URL').'/auth/google/callback'),
+    ],
+
     'stripe' => [
         'mode' => env('STRIPE_MODE', 'test'),
         'key' => env('STRIPE_KEY'),

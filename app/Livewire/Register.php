@@ -10,10 +10,15 @@ use Spatie\Permission\Models\Role;
 class Register extends Component
 {
     public $firstName;
+
     public $lastName;
+
     public $email;
+
     public $phoneNumber;
+
     public $password;
+
     public $password_confirmation;
 
     protected $rules = [
@@ -55,15 +60,7 @@ class Register extends Component
             $role = Role::firstOrCreate(['name' => 'customer']);
             $customer->assignRole($role);
 
-            // Clear form fields
-            $this->reset(['firstName', 'lastName', 'email', 'phoneNumber', 'password', 'password_confirmation']);
-
-            // Emit event for SweetAlert
-            $this->dispatch(
-                'registration-success',
-                message: 'Registration successful! You will be redirected to login page.',
-                redirectUrl: route('login')
-            );
+            $this->redirect(route('login', ['email' => $customer->email]));
         } catch (\Exception $e) {
             $this->dispatch(
                 'registration-error',

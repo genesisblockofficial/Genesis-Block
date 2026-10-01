@@ -16,6 +16,12 @@
                 <p>Enter your details to get started.</p>
             </div>
 
+            <a class="auth-google-button" href="{{ route('auth.google.redirect') }}">
+                <i class="fab fa-google" aria-hidden="true"></i>
+                <span>Continue with Google</span>
+            </a>
+            <div class="auth-divider" aria-hidden="true"><span>or create an account with email</span></div>
+
             @if ($errors->any())
                 <div class="auth-error-summary" role="alert">{{ $errors->first() }}</div>
             @endif
@@ -97,10 +103,6 @@
                 button.setAttribute('title', showingPassword ? 'Hide password' : 'Show password');
                 button.innerHTML = `<i class="fas ${showingPassword ? 'fa-eye-slash' : 'fa-eye'}" aria-hidden="true"></i>`;
             });
-        });
-
-        $wire.on('registration-success', (event) => {
-            window.location.href = event.detail.redirectUrl;
         });
 
         $wire.on('registration-error', (event) => {

@@ -7,6 +7,11 @@
                 <p class="account-eyebrow">GENESIS BLOCK <span>/</span> MEMBER ACCESS</p>
                 <h2 id="auth-gate-title">Sign in to continue.</h2>
                 <p class="auth-gate-intro">Log in to explore indicators, courses, news, resources and the gallery.</p>
+                <a class="auth-google-button auth-google-button-modal" href="{{ route('auth.google.redirect') }}">
+                    <i class="fab fa-google" aria-hidden="true"></i>
+                    <span>Continue with Google</span>
+                </a>
+                <div class="auth-divider auth-divider-modal" aria-hidden="true"><span>or sign in with email</span></div>
                 <form method="POST" action="{{ route('login.store') }}" class="auth-gate-form">
                     @csrf
                     <input type="hidden" name="remember" value="1">
