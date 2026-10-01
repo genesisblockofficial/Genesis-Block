@@ -29,7 +29,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Genesis Block Admin')
-            // ->brandLogo(asset('images/logo.png'))
+            ->brandLogo(asset('images/logo.png'))
+            ->favicon(asset('images/logo.png'))
             ->passwordReset()
             ->colors([
                 'primary' => Color::Amber,

@@ -19,6 +19,8 @@ class AboutUs extends Page
 {
     use Forms\Concerns\InteractsWithForms;
 
+    protected static bool $shouldRegisterNavigation = false;
+
     protected static ?string $recordTitleAttribute = 'About Us';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::InformationCircle;
