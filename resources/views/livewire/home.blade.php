@@ -945,6 +945,20 @@
         </div>
     </section>
 
+    <!-- <section class="home-help-section">
+        <div class="container">
+            <div class="home-help-card">
+                <div class="home-help-icon"><i class="fab fa-whatsapp" aria-hidden="true"></i></div>
+                <div class="home-help-copy">
+                    <p class="home-help-eyebrow">PERSONAL SUPPORT</p>
+                    <h2>Let us help you in your SkillUp journey.</h2>
+                    <p>Have a question about indicators, trading setups or where to begin? Reach out to our team on WhatsApp.</p>
+                </div>
+                <a class="home-help-button" href="https://wa.me/{{ config('services.whatsapp.number') }}?text={{ urlencode('Hello Genesis Block, I would like help with my trading journey.') }}" target="_blank" rel="noopener" aria-label="Contact Genesis Block on WhatsApp">Chat on WhatsApp <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section> -->
+
     <!-- Contact Us -->
     <section class="section-container" id="contact">
         <div class="container">
@@ -1022,4 +1036,5 @@
             </div>
         </div>
     </section>
+    <a class="whatsapp-float" href="https://wa.me/{{ config('services.whatsapp.number') }}?text={{ urlencode('Hello Genesis Block, I would like help with my trading journey.') }}" target="_blank" rel="noopener" aria-label="Contact Genesis Block on WhatsApp" title="Chat on WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
 </div>

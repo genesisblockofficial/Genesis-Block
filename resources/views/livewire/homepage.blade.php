@@ -1,3 +1,7 @@
+@php
+    $socialSettings = \App\Models\SocialMediaSettings::query()->first();
+    $whatsappUrl = $socialSettings?->whatsapp_url ?: 'https://wa.me/' . config('services.whatsapp.number');
+@endphp
 <main class="home-page">
     <section class="home-hero" id="home">
         <div class="container home-hero-layout">
@@ -80,6 +84,13 @@
         </div>
     </section>
 
+    <section class="home-journal home-section">
+        <div class="container home-journal-layout">
+            <div><p class="home-eyebrow">YOUR TRADING PROCESS</p><h2>Turn every trade<br><span>into a lesson.</span></h2></div>
+            <div><p>Capture your setups, entry plans, results and reflections in one private journal. Review your decisions and build a process you can repeat.</p><a data-auth-gate class="home-button home-button-primary" href="{{ route('journal') }}">Explore My Journal <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
+        </div>
+    </section>
+
     <section class="home-gallery home-section" id="gallery">
         <div class="container home-gallery-layout">
             <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85" alt="Bright, modern workspace with desks and plants" loading="lazy">
@@ -100,4 +111,6 @@
             <div><p>For questions about Genesis Block, upcoming courses or the resources on this site, get in touch with our team.</p><a class="home-button home-button-light" href="{{ route('contact-us') }}">Contact us <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>
         </div>
     </section>
+
+    <a class="whatsapp-float" href="{{ $whatsappUrl }}" target="_blank" rel="noopener" aria-label="Contact Genesis Block on WhatsApp" title="Chat on WhatsApp"><i class="fab fa-whatsapp" aria-hidden="true"></i><span>Let Us Help You In Your SkillUp Journey!</span></a>
 </main>

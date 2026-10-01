@@ -37,6 +37,10 @@ return [
         'admin_email' => env('INDICATOR_ADMIN_EMAIL'),
     ],
 
+    'whatsapp' => [
+        'number' => env('WHATSAPP_NUMBER', '15551234567'),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
