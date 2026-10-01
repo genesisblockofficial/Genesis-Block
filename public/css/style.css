@@ -7452,8 +7452,32 @@ body.auth-modal-open { overflow: hidden; }
 .journal-entry-actions button:last-child { color: #a34a47; }
 .journal-empty { color: #718076; padding: 2rem 1rem; text-align: center; }
 .journal-empty i { color: #63af31; font-size: 1.8rem; }.journal-empty h3 { color: #14221c; font-size: 1rem; margin: .8rem 0 .35rem; }.journal-empty p { font-size: .8rem; margin: 0; }
+.faq-page { background: #f5f8f4; color: #14221c; min-height: calc(100vh - 90px); }
+.faq-hero { background: #14221c; color: #fff; padding: 9rem 0 4.5rem; }
+.faq-hero-inner { align-items: end; display: flex; gap: 2rem; justify-content: space-between; }
+.faq-hero h1 { font-size: clamp(2.2rem, 4vw, 3.7rem); letter-spacing: -.04em; line-height: 1; margin: 0 0 1rem; }
+.faq-hero h1 span { color: #a6d882; }
+.faq-hero p:not(.account-eyebrow) { color: #b9c5bb; margin: 0; max-width: 500px; }
+.faq-search-wrap { min-width: min(100%, 320px); }
+.faq-search-wrap label { color: #a6d882; display: block; font-size: .72rem; font-weight: 800; letter-spacing: .08em; margin-bottom: .55rem; text-transform: uppercase; }
+.faq-search-wrap > div { position: relative; }
+.faq-search-wrap i { color: #718076; left: .85rem; position: absolute; top: 50%; transform: translateY(-50%); }
+.faq-search-wrap input { background: #fff; border: 1px solid #cdd8ce; color: #14221c; font: inherit; min-height: 46px; padding: .65rem .75rem .65rem 2.3rem; width: 100%; }
+.faq-search-wrap input:focus { border-color: #63af31; outline: 2px solid rgba(99, 175, 49, .15); }
+.faq-content { padding: 3rem 0 5rem; }
+.faq-content-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 1.5rem; }
+.faq-content-heading .account-eyebrow { margin-bottom: .45rem; }.faq-content-heading h2 { font-size: 2rem; letter-spacing: -.03em; margin: 0; }.faq-content-heading > span { color: #718076; font-size: .78rem; }
+.faq-list { border-top: 1px solid #dfe7e1; }
+.faq-item { background: #fff; border: 1px solid #dfe7e1; border-top: 0; }
+.faq-item summary { align-items: center; cursor: pointer; display: flex; font-size: .92rem; font-weight: 800; justify-content: space-between; list-style: none; padding: 1.25rem 1.4rem; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary i { color: #4e8f29; font-size: .78rem; transition: transform 180ms ease; }
+.faq-item[open] summary i { transform: rotate(45deg); }
+.faq-answer { border-top: 1px solid #edf1ed; color: #5f6e62; font-size: .84rem; line-height: 1.75; padding: 1.1rem 1.4rem 1.35rem; }
+.faq-answer p { margin: 0 0 .75rem; }.faq-answer p:last-child { margin-bottom: 0; }.faq-answer a { color: #4e8f29; font-weight: 700; }
+.faq-empty { background: #fff; border: 1px solid #dfe7e1; padding: 3rem 1rem; text-align: center; }.faq-empty i { color: #63af31; font-size: 1.8rem; }.faq-empty h3 { font-size: 1rem; margin: .8rem 0 .35rem; }.faq-empty p { color: #718076; font-size: .8rem; margin: 0; }
 @media (max-width: 900px) { .journal-layout { grid-template-columns: 1fr; } }
-@media (max-width: 600px) { .journal-hero { padding-top: 7rem; } .journal-hero-inner { align-items: start; flex-direction: column; } .journal-hero-stat { border-left: 0; border-top: 1px solid #516258; padding: .8rem 0 0; } .journal-form-grid-three, .journal-form-grid-two { grid-template-columns: 1fr; } .account-journal-row { align-items: start; flex-direction: column; } }
+@media (max-width: 600px) { .journal-hero, .faq-hero { padding-top: 7rem; } .journal-hero-inner, .faq-hero-inner { align-items: start; flex-direction: column; } .journal-hero-stat { border-left: 0; border-top: 1px solid #516258; padding: .8rem 0 0; } .journal-form-grid-three, .journal-form-grid-two { grid-template-columns: 1fr; } .account-journal-row { align-items: start; flex-direction: column; } .faq-content-heading { align-items: start; flex-direction: column; gap: .5rem; } .faq-search-wrap { width: 100%; } }
 .account-profile-form { background: #fff; border: 1px solid #dfe7e1; padding: 1.5rem; }
 .account-form-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .account-form-field label { display: block; font-size: .78rem; font-weight: 800; margin-bottom: .5rem; }

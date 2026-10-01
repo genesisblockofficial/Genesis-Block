@@ -5,6 +5,7 @@ use App\Livewire\BlogArticle;
 use App\Livewire\BlogIndex;
 use App\Livewire\ContactUs;
 use App\Livewire\Courses;
+use App\Livewire\Faqs;
 use App\Livewire\Gallery;
 use App\Livewire\Home;
 use App\Http\Controllers\IndicatorAccessRequestController;
@@ -35,6 +36,7 @@ Route::get('login', Login::class)->name('login');
 Route::get('register', Register::class)->name('register');
 Route::get('resources', Resources::class)->middleware('auth')->name('resources');
 Route::get('indicators', IndicatorCatalog::class)->middleware('auth')->name('indicators.index');
+Route::get('faqs', Faqs::class)->middleware('auth')->name('faqs');
 Route::get('blogs', BlogIndex::class)->name('blogs.index');
 Route::get('blogs/{slug}', BlogArticle::class)->name('blogs.show');
 Route::post('indicators/{indicator}/free-request', [IndicatorAccessRequestController::class, 'store'])

@@ -17,8 +17,13 @@
                             href="{{ route('about-us') }}">About Us</a></li>
                             <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('resources') ? 'active' : '' }}"
                                 href="{{ route('resources') }}">Resources</a></li>
-                        <li class="nav-item"><a data-auth-gate class="nav-link {{ request()->routeIs('indicators.*') ? 'active' : '' }}"
-                            href="{{ route('indicators.index') }}">Indicators</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {{ request()->routeIs('indicators.*', 'faqs') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Indicators</a>
+                        <ul class="dropdown-menu navbar-dropdown-menu">
+                            <li><a data-auth-gate class="dropdown-item" href="{{ route('indicators.index') }}">Indicators</a></li>
+                            <li><a data-auth-gate class="dropdown-item" href="{{ route('faqs') }}">FAQs</a></li>
+                        </ul>
+                    </li>
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('blogs.*') ? 'active' : '' }}"
                             href="{{ route('blogs.index') }}">Blogs</a></li>
                     <li class="nav-item dropdown">
