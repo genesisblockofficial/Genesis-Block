@@ -131,7 +131,7 @@
                 calendarNote.innerHTML = '<strong>Live data:</strong> Events are supplied by Finnhub and may be revised after publication.';
             } catch (error) {
                 events = [];
-                calendarNote.innerHTML = `<strong>Live data unavailable:</strong> ${error.message} Add a valid <code>FINNHUB_API_KEY</code> to the server environment.`;
+                calendarNote.innerHTML = `<strong>Live data unavailable:</strong> ${error.message}`;
             }
 
             render();

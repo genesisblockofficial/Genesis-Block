@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EconomicCalendarSettings;
 use Carbon\Carbon;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -26,7 +27,7 @@ class EconomicCalendarController extends Controller
             return response()->json([
                 'data' => [],
                 'configured' => false,
-                'message' => 'Live economic events are not configured. Ask an administrator to add a Finnhub API key.',
+                'message' => 'Live economic events are disabled or the Finnhub API key is missing. Enable live events and save the key in Admin → Website CRM → Economic Calendar.',
             ], 503);
         }
 
@@ -61,6 +62,19 @@ class EconomicCalendarController extends Controller
                 ->values();
 
             return response()->json(['data' => $events, 'configured' => true]);
+        } catch (RequestException $exception) {
+            $message = match ($exception->response->status()) {
+                401 => 'Finnhub rejected the saved API key. Check or replace it in Admin → Website CRM → Economic Calendar.',
+                403 => 'Finnhub denied access to the economic calendar for this key/account. Check that your Finnhub account has access to this API resource.',
+                429 => 'Finnhub rate limit reached. Wait a while before loading the calendar again.',
+                default => 'The economic calendar provider is temporarily unavailable.',
+            };
+
+            return response()->json([
+                'data' => [],
+                'configured' => true,
+                'message' => $message,
+            ], 502);
         } catch (\Throwable $exception) {
             report($exception);
 

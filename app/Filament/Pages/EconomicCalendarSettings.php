@@ -49,10 +49,11 @@ class EconomicCalendarSettings extends Page
             ->statePath('data')
             ->schema([
                 Section::make('Live economic calendar')
-                    ->description('The public News page fetches events through the secure server-side proxy. Leave the key field empty to keep the saved key.')
+                    ->description('Enable live events here after saving a Finnhub key with economic-calendar API access. Leave the key field empty to keep the saved key.')
                     ->schema([
                         Toggle::make('enabled')
                             ->label('Show live events on the public News page')
+                            ->helperText('The calendar remains unavailable until this setting is enabled and saved.')
                             ->default(true),
                         TextInput::make('api_key')
                             ->label('Finnhub API key')
@@ -68,10 +69,10 @@ class EconomicCalendarSettings extends Page
         $data = $this->form->getState();
         $settings = $this->settingsId
             ? EconomicCalendarSettingsModel::query()->findOrFail($this->settingsId)
-            : new EconomicCalendarSettingsModel();
+            : new EconomicCalendarSettingsModel;
         $newApiKey = trim((string) ($data['api_key'] ?? ''));
 
-        if ((bool) ($data['enabled'] ?? false) && !filled($newApiKey) && !filled($settings->api_key)) {
+        if ((bool) ($data['enabled'] ?? false) && ! filled($newApiKey) && ! filled($settings->api_key)) {
             throw ValidationException::withMessages([
                 'data.api_key' => 'Add a Finnhub API key before enabling live events.',
             ]);
