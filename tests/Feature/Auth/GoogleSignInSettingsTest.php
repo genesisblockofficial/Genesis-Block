@@ -2,8 +2,10 @@
 
 use App\Models\GoogleOAuthSettings;
 use App\Models\User;
+use App\Services\GoogleOAuthConfiguration;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Socialite\Facades\Socialite;
 
 uses(RefreshDatabase::class);
 
@@ -28,4 +30,16 @@ test('google oauth secrets are encrypted and never rendered by the admin setting
         ->assertSee('Saved; enter only to change')
         ->assertSee('http://localhost/auth/google/callback')
         ->assertDontSee('google-secret-do-not-render');
+});
+
+test('saved google credentials use the current request host for oauth callback', function () {
+    GoogleOAuthSettings::create([
+        'client_id' => 'google-client-id.apps.googleusercontent.com',
+        'client_secret' => 'google-client-secret',
+    ]);
+    config(['services.google.redirect' => 'http://stale-host.example/auth/google/callback']);
+    Socialite::shouldReceive('forgetDrivers')->once();
+
+    expect(app(GoogleOAuthConfiguration::class)->applySavedCredentials())->toBeTrue()
+        ->and(config('services.google.redirect'))->toBe(route('auth.google.callback'));
 });

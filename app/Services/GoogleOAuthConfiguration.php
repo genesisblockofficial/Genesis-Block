@@ -25,6 +25,7 @@ class GoogleOAuthConfiguration
         config([
             'services.google.client_id' => $settings->client_id,
             'services.google.client_secret' => $settings->client_secret,
+            'services.google.redirect' => route('auth.google.callback'),
         ]);
 
         Socialite::forgetDrivers();

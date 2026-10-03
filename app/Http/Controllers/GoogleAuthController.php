@@ -17,7 +17,7 @@ class GoogleAuthController extends Controller
     {
         if (! $configuration->applySavedCredentials()) {
             return to_route('login')->withErrors([
-                'google' => 'Google sign-in is not configured yet. Please sign in with your email and password.',
+                'google' => 'Google sign-in needs setup. An admin must save the Google Client ID and Client Secret under Website CRM → Google Sign-in.',
             ]);
         }
 
@@ -28,7 +28,7 @@ class GoogleAuthController extends Controller
     {
         if (! $configuration->applySavedCredentials()) {
             return to_route('login')->withErrors([
-                'google' => 'Google sign-in is not configured. Please sign in with your email and password.',
+                'google' => 'Google sign-in needs setup. An admin must save the Google Client ID and Client Secret under Website CRM → Google Sign-in.',
             ]);
         }
 
