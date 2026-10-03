@@ -267,6 +267,21 @@ test('free access request stays pending when mail is configured to log only', fu
     expect($accessRequest->fresh()->status)->toBe('new');
 });
 
+test('free access approval explains when the indicator access url is missing', function () {
+    $indicator = makeIndicatorRecord(['trading_view_url' => null]);
+    $accessRequest = IndicatorAccessRequest::create([
+        'indicator_id' => $indicator->id,
+        'indicator_name' => $indicator->name,
+        'email' => 'requester@example.test',
+        'status' => 'new',
+    ]);
+
+    expect(fn () => app(IndicatorAccessDelivery::class)->sendFreeRequestAccess($accessRequest))
+        ->toThrow(RuntimeException::class, 'This indicator has no TradingView access URL.');
+
+    expect($accessRequest->fresh()->status)->toBe('new');
+});
+
 test('admin smtp settings are encrypted and applied to the mail configuration', function () {
     SmtpMailSettings::create([
         'host' => 'smtp.example.test',

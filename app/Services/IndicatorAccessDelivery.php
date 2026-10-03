@@ -42,8 +42,20 @@ class IndicatorAccessDelivery
         $request->loadMissing('indicator');
         $indicator = $request->indicator;
 
-        if ($request->status !== 'new' || ! $indicator || $indicator->is_paid || ! $indicator->trading_view_url) {
-            throw new RuntimeException('This request is no longer eligible for free access or has no access URL configured.');
+        if ($request->status !== 'new') {
+            throw new RuntimeException('This access request has already been processed.');
+        }
+
+        if (! $indicator) {
+            throw new RuntimeException('The indicator linked to this request no longer exists.');
+        }
+
+        if ($indicator->is_paid) {
+            throw new RuntimeException('This indicator is marked as paid. Only free indicators can be approved from free access requests.');
+        }
+
+        if (blank($indicator->trading_view_url)) {
+            throw new RuntimeException('This indicator has no TradingView access URL. Open Website CRM → Indicators, edit the indicator, add its Private TradingView access URL, and save before approving.');
         }
 
         $this->sendAccessMail($request->email, $indicator->name, $indicator->trading_view_url, 'free request', $template);
